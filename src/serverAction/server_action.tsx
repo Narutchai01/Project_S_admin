@@ -19,6 +19,8 @@ export const handlerLogin = async (formData: FormData) => {
   const response = await fetchInstance("/admin/login", {
     method: "POST",
     body: JSON.stringify(data),
+  }).catch((error) => {
+    console.error("Error:", error);
   });
 
   await cookieStore.set({
@@ -26,7 +28,7 @@ export const handlerLogin = async (formData: FormData) => {
     value: response.token,
   });
 
-  redirect("/");
+  redirect("/dashboard/skincare");
 };
 
 export const CheckCookie = async () => {
