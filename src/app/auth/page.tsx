@@ -16,6 +16,7 @@ const Authpage = () => {
           className="flex flex-col gap-y-10 w-full shadow-2xl rounded-3xl p-10"
         >
           <Input
+            id="email"
             label="Email"
             type="text"
             name="email"
@@ -23,12 +24,14 @@ const Authpage = () => {
             className="bg-inherit"
           />
           <Input
+            id="password"
             label="Password"
             type="password"
             name="password"
             radius="full"
           />
           <Button
+            id="login"
             type="submit"
             radius="full"
             className="bg-[#FF6F61] font-bold text-white"
