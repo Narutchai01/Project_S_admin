@@ -9,7 +9,7 @@ const DashBoardlayout = ({
 }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <div className="jun-layout">
-      <header className="jun-header bg-red-600 jun-header-clip"><Header/></header>
+      <header className="jun-header bg-red-600"><Header/></header>
       <main className="jun-content bg-blue-600">{children}</main>
       <aside className="jun-edgeSidebar">
         <div className="jun-edgeContent"><SideBar/></div>
