@@ -10,7 +10,7 @@ const DashBoardlayout = ({
   return (
     <div className="jun-layout">
       <header className="jun-header bg-red-600"><Header/></header>
-      <main className="jun-content bg-blue-600">{children}</main>
+      <main className="jun-content bg-white-600">{children}</main>
       <aside className="jun-edgeSidebar">
         <div className="jun-edgeContent"><SideBar/></div>
       </aside>
