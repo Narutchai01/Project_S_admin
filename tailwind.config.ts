@@ -19,7 +19,7 @@ export default {
         White: '#FFFFFF',
       },
       fontFamily: {
-        Lexend: ['Lexend'],
+        Lexend: ['Lexend', 'sans-serif'],
       },
       fontSize: {
         'text-heading': ['2.1875rem', { fontWeight: '600' }], /* 35px */
