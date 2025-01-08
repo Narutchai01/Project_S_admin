@@ -7,6 +7,7 @@ export default {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
@@ -22,11 +23,12 @@ export default {
         Lexend: ['Lexend', 'sans-serif'],
       },
       fontSize: {
-        'text-heading': ['2.1875rem', { fontWeight: '600' }], /* 35px */
-        'text-titleCrad': ['1.25rem',{ fontWeight: '400' }], /* 20px */
-        'text-contentCrad': ['1.125rem',{ fontWeight: '400' }], /* 20px */
-        'text-sideBar': ['1.125rem',{ fontWeight: '600' }], /* 18px */
-        'text-content': ['1rem',{ fontWeight: '400' }], /* 16px */
+        'heading': ['2.1875rem', { fontWeight: '600' }], /* 35px */
+        'titleCrad': ['1.25rem',{ fontWeight: '400' }], /* 20px */
+        'contentCrad': ['1.125rem',{ fontWeight: '400' }], /* 18px */
+        'sideBar': ['1.125rem',{ fontWeight: '600' }], /* 18px */
+        'titleTable': ['1rem',{ fontWeight: '600' }], /* 16px */
+        'contentTable': ['1rem',{ fontWeight: '400' }], /* 16px */
       },
       fontWeight: {
         normal: '400',
