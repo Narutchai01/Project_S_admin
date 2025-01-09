@@ -18,7 +18,7 @@ const Skincarepage = () => {
   }));
 
   return (
-    <div className="p-6">
+    <div className="p-6 font-Lexend">
       <div className="w-full max-w-5xl mx-auto rounded-2xl border border-gray-200 shadow-md">
         <Table
           aria-label="Skincare Table"
@@ -26,9 +26,9 @@ const Skincarepage = () => {
           className="rounded-2xl"
         >
           <TableHeader>
-            <TableColumn className="text-lg font-bold">ID</TableColumn>
-            <TableColumn className="text-lg font-bold">Name</TableColumn>
-            <TableColumn className="text-lg font-bold">&nbsp;</TableColumn>
+            <TableColumn className="text-titleTable">ID</TableColumn>
+            <TableColumn className="text-titleTable">Name</TableColumn>
+            <TableColumn className="text-titleTable">&nbsp;</TableColumn>
           </TableHeader>
           <TableBody items={data}>
             {(item) => (
@@ -36,7 +36,7 @@ const Skincarepage = () => {
                 <TableCell>
                   <Link
                     href={`/dashboard/skincare/${item.id}`}
-                    className="text-black-500 hover:underline"
+                    className="text-contentTable hover:underline"
                   >
                     {item.id}
                   </Link>
@@ -45,14 +45,14 @@ const Skincarepage = () => {
                 <TableCell>
                   <Link
                     href={`/dashboard/skincare/${item.id}`}
-                    className="text-black-500 hover:underline"
+                    className="text-contentTable hover:underline"
                   >
                     {item.name}
                   </Link>
                 </TableCell>
 
                 <TableCell className="text-right">
-                  <button className="text-red-500 border border-red-500 px-4 py-2 rounded-xl hover:bg-red-50">
+                  <button className="text-Bittersweet text-contentTable border border-red-500 px-4 py-2 rounded-xl hover:bg-red-50">
                     Delete
                   </button>
                 </TableCell>
