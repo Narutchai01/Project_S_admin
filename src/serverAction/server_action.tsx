@@ -39,3 +39,5 @@ export const CheckCookie = async () => {
     await redirect("/auth");
   }
 };
+
+
