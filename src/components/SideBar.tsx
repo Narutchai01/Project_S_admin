@@ -2,6 +2,7 @@
 
 import React , {FC} from "react";
 import { User } from "@nextui-org/react";
+import Link from "next/link";
 
 const dataSideBar = [
   {
@@ -45,9 +46,9 @@ const SideBar: FC<SideBarProps> = (props) => {
           <ul className="list-none flex flex-col justify-center items-center gap-y-4">
             {dataSideBar.map((item, index) => (
               <li key={index}>
-                <a href={item.link} className={category === item.link.split("/")[2] ? activeStyle : inactiveStyle}>
+                <Link href={item.link} className={category === item.link.split("/")[2] ? activeStyle : inactiveStyle}>
                   {item.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
