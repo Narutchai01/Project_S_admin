@@ -34,7 +34,7 @@ const Authpage = () => {
             id="login"
             type="submit"
             radius="full"
-            className=" bg-primary font-bold text-white"
+            className=" bg-Bittersweet font-bold text-white"
             size="lg"
             variant="shadow"
           >
