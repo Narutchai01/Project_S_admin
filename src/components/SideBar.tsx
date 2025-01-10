@@ -3,6 +3,7 @@
 import React , {FC} from "react";
 import { User } from "@nextui-org/react";
 import Link from "next/link";
+import { Data} from "@/interface/admin";
 
 const dataSideBar = [
   {
@@ -25,12 +26,15 @@ const dataSideBar = [
 
 interface SideBarProps {
   category: string;
+  adminData : Data | undefined;
 }
 
 const SideBar: FC<SideBarProps> = (props) => {
-  const { category } = props;
+  const { category , adminData } = props;
   const inactiveStyle = "text-Quartz text-sideBar rounded-2xl block py-2 px-4 hover:bg-Bittersweet hover:text-white";
   const activeStyle = "rounded-2xl text-sideBar block py-2 px-4 bg-Bittersweet text-white";
+
+ const { data } = adminData || { data: null };
 
 
   return (
@@ -39,9 +43,9 @@ const SideBar: FC<SideBarProps> = (props) => {
         <div className="container mx-auto py-4 px-6 gap-y-10">
           <User
             avatarProps={{
-              src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+              src: data?.image,
             }}
-            name="Jane Doe"
+            name={data?.full_name}
           />
           <ul className="list-none flex flex-col justify-center items-center gap-y-4">
             {dataSideBar.map((item, index) => (

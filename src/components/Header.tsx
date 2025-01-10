@@ -6,15 +6,16 @@ import { Search } from "lucide-react";
 interface HeaderProps {
   category: string;
   itemName: string;
+  leght?: number;
 }
 
 const Header: FC<HeaderProps> = (props) => {
-  const { category, itemName } = props;
+  const { category, itemName, leght = 0 } = props;
   return (
     <>
       <div className="grid grid-cols-3 gap-4 p-4 w-full items-center">
         <h1 className=" text-heading text-Quartz">
-          {itemName ? itemName : category}
+          {leght > 3 ? itemName : category}
         </h1>
         <div className="w-full">
           <Input

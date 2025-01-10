@@ -25,7 +25,7 @@ export const handlerLogin = async (formData: FormData) => {
 
   await cookieStore.set({
     name: "token",
-    value: response.token,
+    value: response.data.token,
   });
 
   redirect("/dashboard/skincare");
@@ -33,9 +33,46 @@ export const handlerLogin = async (formData: FormData) => {
 
 export const CheckCookie = async () => {
   const cookieStore = await cookies();
-  const token = await cookieStore.get("token");
+  const token = cookieStore.get("token");
 
   if (!token) {
     await redirect("/auth");
   }
+};
+
+export const fecthAdmin = async () => {
+  await CheckCookie();
+  const cookieStore = await cookies();
+  const token = await cookieStore.get("token");
+  const response = await fetchInstance("/admin/profile", {
+    headers: {
+      token:
+        token?.value ,
+    },
+    method: "GET",
+  }).catch((error) => {
+    console.error("Error:", error);
+    return error;
+  });
+  return response;
+};
+
+export const fectchSkincares = async () => {
+  const response = await fetchInstance("/skincare", {
+    method: "GET",
+  }).catch((error) => {
+    console.error("Error:", error);
+    return error;
+  });
+  return response;
+};
+
+export const fectchSkincareById = async (id: string) => {
+  const response = await fetchInstance(`/skincare/${id}`, {
+    method: "GET",
+  }).catch((error) => {
+    console.error("Error:", error);
+    return error;
+  });
+  return response;
 };
