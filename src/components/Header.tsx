@@ -5,19 +5,15 @@ import { Search } from "lucide-react";
 
 interface HeaderProps {
   category: string;
-  itemName: string;
-  leght?: number;
 }
 
 const Header: FC<HeaderProps> = (props) => {
-  const { category, itemName, leght = 0 } = props;
+  const { category } = props;
   return (
     <>
-      <div className="grid grid-cols-3 gap-4 p-4 w-full items-center">
-        <h1 className=" text-heading text-Quartz">
-          {leght > 3 ? itemName : category}
-        </h1>
-        <div className="w-full">
+      <div className=" flex flex-row w-full justify-between items-center container mx-auto px-6">
+        <h1 className=" text-heading text-Quartz">{category}</h1>
+        <div className=" w-full container mx-auto px-6">
           <Input
             labelPlacement="outside"
             placeholder="Search"
@@ -26,9 +22,9 @@ const Header: FC<HeaderProps> = (props) => {
             type="text"
           />
         </div>
-        <div className="flex justify-center">
+        <div className="">
           <Button
-            className="bg-Bittersweet text-white w-1/3 items-center"
+            className="bg-Bittersweet text-white items-center w-full"
             radius="full"
           >
             Add {category}
