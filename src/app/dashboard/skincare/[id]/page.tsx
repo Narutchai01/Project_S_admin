@@ -1,26 +1,31 @@
 "use client";
+import React, { useEffect, useState,useContext } from "react";
+import { SkincareItem } from "@/interface/admin";
+import { fectchSkincareById } from "@/serverAction/server_action";
+import SkincareDetails from "@/components/skincareDetails";
+import { DashBoardContext } from "../../layout";
 
-import React, { useEffect, useState } from "react";
-import skincareData from "../skincareData";
-import SkincareDetails from "./../../../../components/skincareDetails"
-import { SkincareItem } from "../../../../interface/admin";
 
 const SkincareByIdPage = ({ params }: { params: Promise<{ id: string }> }) => {
-  const [id, setId] = useState<string | null>(null);
+  const [id, setId] = useState<string>("");
   const [skincareItem, setSkincareItem] = useState<SkincareItem | null>(null);
+  const context = useContext(DashBoardContext);
+  const { setItemName } = context!;
+
 
   useEffect(() => {
-    async function fetchData() {
-      const paramsData = await params;
-      const fetchedId = paramsData.id;
-      setId(fetchedId);
+    params.then((params) => {
+      const id = String(params.id);
+      setId(id);
+    });
+    fectchSkincareById(id).then((response) => {
+      setSkincareItem(response.data);
+    });
+    setItemName(skincareItem?.name || "");
+  },[id, params , setItemName, skincareItem?.name]);
 
-      const item = skincareData.find((item) => item.id === fetchedId);
-      setSkincareItem(item || null);
-    }
 
-    fetchData();
-  }, [params, skincareData]);
+  
 
   return (
     <div className="flex justify-center items-center">

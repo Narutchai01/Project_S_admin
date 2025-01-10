@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React , {useState,useEffect} from "react";
 import {
   Table,
   TableHeader,
@@ -10,12 +10,22 @@ import {
   TableCell,
 } from "@nextui-org/react";
 import Link from "next/link";
+import { fectchSkincares } from "@/serverAction/server_action";
+import { SkincareResponse } from "@/interface/admin";
 
 const Skincarepage = () => {
-  const data = Array.from({ length: 60 }, (_, index) => ({
-    id: `00${index + 1}`,
-    name: `Skincare Name ${index + 1}`,
-  }));
+
+  const [skincare, setSkincare] = useState<SkincareResponse>();
+
+
+  useEffect(() => {
+    fectchSkincares().then((res) => {
+      setSkincare(res);
+    });
+  }, []);
+
+  const data = skincare?.data || [];
+  
 
   return (
     <div className="p-6 font-Lexend">
