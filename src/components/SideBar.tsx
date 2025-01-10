@@ -29,10 +29,9 @@ interface SideBarProps {
 
 const SideBar: FC<SideBarProps> = (props) => {
   const { category } = props;
-  const inactiveStyle = "text-Quartz rounded-2xl block py-2 px-4 hover:bg-Bittersweet hover:text-white";
-  const activeStyle = "rounded-2xl block py-2 px-4 bg-Bittersweet text-white";
+  const inactiveStyle = "text-Quartz text-sideBar rounded-2xl block py-2 px-4 hover:bg-Bittersweet hover:text-white";
+  const activeStyle = "rounded-2xl text-sideBar block py-2 px-4 bg-Bittersweet text-white";
 
- 
 
   return (
     <>
