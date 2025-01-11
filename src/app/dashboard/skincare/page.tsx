@@ -48,7 +48,7 @@ const Skincarepage = () => {
                     href={`/dashboard/skincare/${item.id}`}
                     className="text-contentTable hover:underline"
                   >
-                    {item.id}
+                    {item.id.toString().padStart(2, "0")}
                   </Link>
                 </TableCell>
 
