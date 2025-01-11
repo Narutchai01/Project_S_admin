@@ -88,6 +88,8 @@ export const getToken = async() => {
 export const addSkincare = async (formData: FormData) => {
   await CheckCookie();
   const token = await getToken();
+
+  formData.append("image", formData.get("file") as Blob);
   const response = await fetchInstance("/admin/skincare", {
     method: "POST",
     headers: {
