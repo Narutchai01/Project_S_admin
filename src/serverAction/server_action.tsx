@@ -23,10 +23,12 @@ export const handlerLogin = async (formData: FormData) => {
     console.error("Error:", error);
   });
 
-  await cookieStore.set({
-    name: "token",
-    value: response.data.token,
-  });
+  if (response && response.data) {
+    await cookieStore.set({
+      name: "token",
+      value: response.data?.token,
+    });
+  }
 
   redirect("/dashboard/skincare");
 };
@@ -76,3 +78,5 @@ export const fectchSkincareById = async (id: string) => {
   });
   return response;
 };
+
+
