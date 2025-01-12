@@ -22,8 +22,9 @@ const SkincareDetails: React.FC<{
             <Image
               src={skincareItem.image}
               alt={skincareItem.name}
-              layout="fill"
-              objectFit="cover"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-200">

@@ -30,3 +30,11 @@ export type Data = {
   data: IAdmin| null | undefined; 
   error: string | null;
 }
+
+export interface IHeaderItems {
+  itemName: string;
+  skincareItem: SkincareItem;
+}
+export interface EditDetailProps {
+  skincareItem: SkincareItem;
+}

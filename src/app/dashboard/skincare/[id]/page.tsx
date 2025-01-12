@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { SkincareItem } from "@/interface/admin";
 import { fectchSkincareById } from "@/serverAction/server_action";
 import SkincareDetails from "@/components/skincareDetails";
+import HeaderItem from "@/components/HeaderItem";
 import { DashBoardContext } from "../../layout";
-
 
 const SkincareByIdPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [id, setId] = useState<string>("");
@@ -12,36 +12,58 @@ const SkincareByIdPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const context = useContext(DashBoardContext);
   const { setItemName } = context!;
 
-
   useEffect(() => {
-    params.then((params) => {
-      const id = String(params.id);
+    const fetchData = async () => {
+      const resolvedParams = await params;
+      const id = String(resolvedParams.id);
+      console.log("Fetched ID from params:", id);
       setId(id);
-    });
-    fectchSkincareById(id).then((response) => {
-      setSkincareItem(response.data);
-    });
-    setItemName(skincareItem?.name || "");
-  },[id, params , setItemName, skincareItem?.name]);
+
+      if (id) {
+        try {
+          const response = await fectchSkincareById(id);
+          if (response?.data) {
+            console.log("Fetched skincare data:", response.data);
+            setSkincareItem(response.data);
+            setItemName(response.data.name || "");
+          } else {
+            console.warn("No skincare data found for ID:", id);
+          }
+        } catch (error) {
+          console.error("Error fetching skincare by ID:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [params, setItemName]);
 
 
-  
 
   return (
-    <div className="flex justify-center items-center">
-      {skincareItem ? (
-        <SkincareDetails skincareItem={skincareItem} readOnly={true} />
-      ) : id ? (
-        <div className="text-center">
-          <h1 className="text-titleCrad text-black mt-4">
-            Skincare Not Found
-          </h1>
-        </div>
-      ) : (
-        <div className="text-center">
-          <h1 className="text-titleCrad text-black">Loading...</h1>
-        </div>
+    <div className="flex flex-col items-center w-full gap-6 p-6">
+      {skincareItem && (
+        <HeaderItem
+          itemName={skincareItem.name}
+          skincareItem={skincareItem}
+        />
       )}
+
+      <div className="flex flex-col justify-center items-center w-full">
+        {skincareItem ? (
+          <SkincareDetails skincareItem={skincareItem} readOnly={true} />
+        ) : id ? (
+          <div className="text-center">
+            <h1 className="text-titleCrad text-black mt-4">
+              Skincare Not Found
+            </h1>
+          </div>
+        ) : (
+          <div className="text-center">
+            <h1 className="text-titleCrad text-black">Loading...</h1>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
