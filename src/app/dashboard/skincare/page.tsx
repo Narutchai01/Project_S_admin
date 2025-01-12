@@ -40,7 +40,7 @@ const Skincarepage = () => {
             <TableColumn className="text-titleTable">Name</TableColumn>
             <TableColumn className="text-titleTable">&nbsp;</TableColumn>
           </TableHeader>
-          <TableBody items={data}>
+          <TableBody items={data}  emptyContent={"No rows to display."}>
             {(item) => (
               <TableRow key={item.id} className="border-b border-gray-200">
                 <TableCell>
