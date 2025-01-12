@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState } from "react";
+import React, {useContext} from "react";
 import {
   Button,
   Modal,
@@ -9,51 +9,36 @@ import {
   ModalBody,
   ModalFooter,
 } from "@nextui-org/react";
-import SkincareDetails from "@/components/skincareDetails";
-import { EditDetailProps, SkincareItem } from "@/interface/admin";
-import { FilePenLine } from "lucide-react";
+
+import { DashBoardContext } from "@/app/dashboard/layout";
+import SkincareDetails from "./skincareDetails";
+import { SkincareItem } from "@/interface/admin";
 
 
-const EditDetail: FC<EditDetailProps> = ({ skincareItem }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editData, setEditData] = useState<SkincareItem>({ ...skincareItem });
+const EditDetail  = () => {
 
-  const handleChange = (key: keyof SkincareItem, value: string) => {
-    setEditData({
-      ...editData,
-      [key]: value,
-    });
-  };
+  const context = useContext(DashBoardContext);
+  const { isOpen ,setIsOpen , skincareItem} = context!;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Updated Data:", editData);
-    setIsModalOpen(false);
-  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  }
 
   return (
     <>
-      <Button
-        className="bg-Bittersweet text-white items-center w-full"
-        radius="full"
-        onPress={() => setIsModalOpen(true)}
-      >
-        <FilePenLine />
-      </Button>
-
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} size="full">
+      <Modal size="full" isOpen={isOpen} onClose={handleClose}>
         <ModalContent>
           <ModalHeader>Edit Skincare</ModalHeader>
-          <form onSubmit={handleSubmit}>
+          <form>
             <ModalBody>
-              <SkincareDetails
-                skincareItem={editData}
+              <SkincareDetails 
+                skincareItem={skincareItem ?? {} as SkincareItem}
                 readOnly={false}
-                onChange={handleChange}
               />
             </ModalBody>
             <ModalFooter>
-              <Button color="danger" variant="light" onPress={() => setIsModalOpen(false)}>
+              <Button color="danger" variant="light" onPress={handleClose}>
                 Cancel
               </Button>
               <Button type="submit" color="primary">

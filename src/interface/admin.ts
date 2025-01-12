@@ -33,8 +33,9 @@ export type Data = {
 
 export interface IHeaderItems {
   itemName: string;
-  skincareItem: SkincareItem;
+  setIsOpen: (value: boolean) => void;
 }
-export interface EditDetailProps {
-  skincareItem: SkincareItem;
+
+export interface IEditDetailProps {
+  isOpen: boolean;
 }

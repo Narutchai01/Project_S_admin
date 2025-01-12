@@ -1,16 +1,14 @@
 "use client";
 import React, { useEffect, useState, useContext } from "react";
-import { SkincareItem } from "@/interface/admin";
 import { fectchSkincareById } from "@/serverAction/server_action";
 import SkincareDetails from "@/components/skincareDetails";
-import HeaderItem from "@/components/HeaderItem";
 import { DashBoardContext } from "../../layout";
 
 const SkincareByIdPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [id, setId] = useState<string>("");
-  const [skincareItem, setSkincareItem] = useState<SkincareItem | null>(null);
+  // const [skincareItem, setSkincareItem] = useState<SkincareItem | null>(null);
   const context = useContext(DashBoardContext);
-  const { setItemName } = context!;
+  const { setItemName , skincareItem , setSkincareItem } = context!;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +22,9 @@ const SkincareByIdPage = ({ params }: { params: Promise<{ id: string }> }) => {
           const response = await fectchSkincareById(id);
           if (response?.data) {
             console.log("Fetched skincare data:", response.data);
-            setSkincareItem(response.data);
+            if (setSkincareItem) {
+              setSkincareItem(response.data);
+            }
             setItemName(response.data.name || "");
           } else {
             console.warn("No skincare data found for ID:", id);
@@ -36,20 +36,13 @@ const SkincareByIdPage = ({ params }: { params: Promise<{ id: string }> }) => {
     };
 
     fetchData();
-  }, [params, setItemName]);
+  }, [params, setItemName, setSkincareItem]);
 
 
 
   return (
     <div className="flex flex-col items-center w-full gap-6 p-6">
-      {skincareItem && (
-        <HeaderItem
-          itemName={skincareItem.name}
-          skincareItem={skincareItem}
-        />
-      )}
-
-      <div className="flex flex-col justify-center items-center w-full">
+        <div className="flex flex-col justify-center items-center w-full">
         {skincareItem ? (
           <SkincareDetails skincareItem={skincareItem} readOnly={true} />
         ) : id ? (

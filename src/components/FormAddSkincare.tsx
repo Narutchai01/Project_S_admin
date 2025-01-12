@@ -25,7 +25,7 @@ const FormAddSkincare = () => {
         </div>
       </div>
       <div></div>
-      <form action={addSkincare} className="bg-white rounded-xl shadow-md border p-6">
+      <form action={addSkincare}>
         <Input
           placeholder="upload image"
           type="file"
@@ -37,15 +37,17 @@ const FormAddSkincare = () => {
             }
           }}
         />
-        <h2 className="text-titleCrad text-Quartz mb-2">Skincare name</h2>
-        <Input name="name" />
+        <div className="bg-white rounded-xl shadow-md border p-6">
+          <h2 className="text-titleCrad text-Quartz mb-2">Skincare name</h2>
+          <Input name="name" />
 
-        <h2 className="text-titleCrad text-Quartz mb-2">Detail</h2>
-        <Input name="description" />
+          <h2 className="text-titleCrad text-Quartz mb-2">Detail</h2>
+          <Input name="description" />
 
-        <Button type="submit" className="bg-Bittersweet font-bold text-white">
+          <Button type="submit" className="bg-Bittersweet font-bold text-white">
             Add Skincare
-        </Button>
+          </Button>
+        </div>
       </form>
     </div>
   );
