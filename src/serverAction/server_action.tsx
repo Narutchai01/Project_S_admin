@@ -79,4 +79,28 @@ export const fectchSkincareById = async (id: string) => {
   return response;
 };
 
+export const getToken = async() => {
+  await CheckCookie();
+  const cookieStore = await cookies();
+  const token = await cookieStore.get("token");
+  return token?.value;
+}
 
+
+export const addSkincare = async (formData: FormData) => {
+  await CheckCookie();
+  const token = await getToken();
+
+  formData.append("image", formData.get("file") as Blob);
+  const response = await fetchInstance("/admin/skincare", {
+    method: "POST",
+    headers: {
+      token: token,
+    },
+    body: formData,
+  }).catch((error) => {
+    console.error("Error:", error);
+    return error;
+  });
+  return response;
+};
