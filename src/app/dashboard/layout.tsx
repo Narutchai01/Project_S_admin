@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { fecthAdmin } from "@/serverAction/server_action";
 import { Data } from "@/interface/admin";
 import HeaderItem from "@/components/HeaderItem";
+import HeaderAdd from "@/components/HeaderAdd";
 
 interface DashBoardContextType {
   setItemName: (name: string) => void;
@@ -33,7 +34,7 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       <div className="jun-layout">
         <header className="jun-header jun-header-h-[3.5rem]">
           {pathname.length > 3 ? (
-            <HeaderItem itemName={itemName} />
+            pathname[3] != "add" ? <HeaderItem itemName={itemName} /> : <HeaderAdd category={category} />
           ) : (
             <Header category={category} />
           )}

@@ -2,6 +2,7 @@
 import React, { FC } from "react";
 import { Input, Button } from "@nextui-org/react";
 import { Search } from "lucide-react";
+import Link from "next/link";
 
 interface HeaderProps {
   category: string;
@@ -23,12 +24,14 @@ const Header: FC<HeaderProps> = (props) => {
           />
         </div>
         <div className="">
-          <Button
-            className="bg-Bittersweet text-white items-center w-full"
-            radius="full"
-          >
-            Add {category}
-          </Button>
+          <Link href="/dashboard/skincare/add">
+            <Button
+              className="bg-Bittersweet text-white items-center w-full"
+              radius="full"
+            >
+              Add {category}
+            </Button>
+          </Link>
         </div>
       </div>
     </>
