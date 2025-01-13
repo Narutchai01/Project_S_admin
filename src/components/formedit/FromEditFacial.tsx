@@ -27,7 +27,7 @@ const FromEditFacial: FC<FromEditFacial> = (props) => {
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              Modal Title
+              Update {facial.name}
             </ModalHeader>
             <ModalBody>
               <div className="flex justify-center items-center">
