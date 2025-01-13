@@ -42,3 +42,11 @@ export type AcneResponse = {
   data: AcneItem[];
   error: string | null;
 }
+export interface IHeaderItems {
+  itemName: string;
+  setIsOpen: (value: boolean) => void;
+}
+
+export interface IEditDetailProps {
+  isOpen: boolean;
+}
