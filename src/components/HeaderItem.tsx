@@ -1,14 +1,15 @@
-import React ,{FC} from "react";
+import React, { FC } from "react";
 import { Button } from "@nextui-org/react";
 import { FilePenLine } from "lucide-react";
 
 interface IHeaderItemsProps {
   itemName: string;
+  onOpen : ()=> void;
 }
 
-const HeaderItem : FC<IHeaderItemsProps> = (props) => {
-
-    const {itemName} = props
+const HeaderItem: FC<IHeaderItemsProps> = (props) => {
+  const { itemName, onOpen } = props;
+  // const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <div className=" flex flex-row w-full justify-between items-center container mx-auto px-6">
@@ -18,8 +19,8 @@ const HeaderItem : FC<IHeaderItemsProps> = (props) => {
         <Button
           className="bg-Bittersweet text-white items-center w-full"
           radius="full"
+          onPress={onOpen}
         >
-          {/* Add {category} */}
           <FilePenLine />
         </Button>
       </div>

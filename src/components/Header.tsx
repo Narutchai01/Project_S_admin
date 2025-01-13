@@ -24,7 +24,7 @@ const Header: FC<HeaderProps> = (props) => {
           />
         </div>
         <div className="">
-          <Link href="/dashboard/skincare/add">
+          <Link href={`/dashboard/${category}/add`}>
             <Button
               className="bg-Bittersweet text-white items-center w-full"
               radius="full"
