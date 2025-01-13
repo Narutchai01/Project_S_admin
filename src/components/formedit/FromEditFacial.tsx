@@ -1,6 +1,6 @@
 import React, { useState, FC } from "react";
 import Image from "next/image";
-import { addFacial, updateFacial } from "@/serverAction/facial";
+import {updateFacial } from "@/serverAction/facial";
 import {
   Textarea,
   Modal,
