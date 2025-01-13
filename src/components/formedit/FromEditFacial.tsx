@@ -93,7 +93,10 @@ const FromEditFacial: FC<FromEditFacial> = (props) => {
                     <Button
                       type="submit"
                       className="bg-Bittersweet font-bold text-white"
-                      onPress={onClose}
+                      onPress={() => {
+                        onClose();
+                        window.location.reload();
+                      }}
                     >
                       Update
                     </Button>
