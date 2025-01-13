@@ -1,15 +1,12 @@
 "use client";
 
 import React, { FC } from "react";
-// import { IHeaderItems } from "@/interface/admin";
+import { IHeaderItemsProps } from "@/interface/admin";
 import { Button } from "@nextui-org/react";
 import { FilePenLine } from "lucide-react";
 import EditDetail from "./editDetail";
 
-interface IHeaderItemsProps {
-  itemName: string;
-  onOpen : ()=> void;
-}
+
 
 const HeaderItem: FC<IHeaderItemsProps> = (props) => {
   const { itemName, onOpen } = props;

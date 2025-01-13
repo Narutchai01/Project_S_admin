@@ -3,20 +3,19 @@ export type Ilogin = {
   password: string;
 };
 
-export type SkincareItem  = {
+export type SkincareItem = {
   id: string;
   name: string;
   image: string;
   description: string;
-  create_by : number;
+  create_by: number;
 };
 
 export type SkincareResponse = {
   status: boolean;
   data: SkincareItem[];
   error: string | null;
-}
-
+};
 
 export interface IAdmin {
   id: number;
@@ -27,13 +26,13 @@ export interface IAdmin {
 
 export type Data = {
   status: boolean;
-  data: IAdmin| null | undefined; 
+  data: IAdmin | null | undefined;
   error: string | null;
-}
+};
 
-export interface IHeaderItems {
+export interface IHeaderItemsProps {
   itemName: string;
-  setIsOpen: (value: boolean) => void;
+  onOpen: () => void;
 }
 
 export interface IEditDetailProps {
