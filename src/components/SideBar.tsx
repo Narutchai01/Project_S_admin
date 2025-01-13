@@ -20,7 +20,7 @@ const dataSideBar = [
   },
   {
     title: "Skin Problems",
-    link: "/contact",
+    link: "/dashboard/facial",
   },
 ];
 
