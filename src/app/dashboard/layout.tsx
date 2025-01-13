@@ -5,7 +5,7 @@ import SideBar from "@/components/SideBar";
 import React, { useState, ReactNode, createContext, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { fecthAdmin } from "@/serverAction/server_action";
-import { Data } from "@/interface/admin";
+import { AcneItem, Data } from "@/interface/admin";
 import HeaderItem from "@/components/HeaderItem";
 import HeaderAdd from "@/components/HeaderAdd";
 import { useDisclosure } from "@nextui-org/react";
@@ -15,6 +15,8 @@ interface DashBoardContextType {
   isOpen: boolean;
   onOpen: () => void;
   onOpenChange: () => void;
+  acneItem?: AcneItem | null;
+  setAcneItem?: (acneItem: AcneItem | null) => void;
 }
 
 export const DashBoardContext = createContext<DashBoardContextType | undefined>(
@@ -27,6 +29,7 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   const [dataAdmin, setDataAdmin] = useState<Data | undefined>(undefined);
   const [itemName, setItemName] = useState<string>("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [acneItem, setAcneItem] = useState<AcneItem | null>(null);
 
   useEffect(() => {
     fecthAdmin().then((res) => {
@@ -38,7 +41,7 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
 
   return (
     <DashBoardContext.Provider
-      value={{ setItemName, isOpen, onOpen, onOpenChange }}
+      value={{ setItemName, isOpen, onOpen, onOpenChange, acneItem, setAcneItem }}
     >
       <div className="jun-layout">
         <header className="jun-header jun-header-h-[3.5rem]">
