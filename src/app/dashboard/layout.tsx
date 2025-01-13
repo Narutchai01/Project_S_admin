@@ -9,6 +9,7 @@ import { AcneItem, Data } from "@/interface/admin";
 import HeaderItem from "@/components/HeaderItem";
 import HeaderAdd from "@/components/HeaderAdd";
 import { useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 
 interface DashBoardContextType {
   setItemName: (name: string) => void;
@@ -46,6 +47,11 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       <div className="jun-layout">
         <header className="jun-header jun-header-h-[3.5rem]">
           {pathname.length > 3 ? (
+            pathname[3] != "add" ? (
+              <HeaderItem itemName={itemName} onOpen={onOpen} />
+            ) : (
+              <HeaderAdd category={category} />
+            )
             pathname[3] != "add" ? (
               <HeaderItem itemName={itemName} onOpen={onOpen} />
             ) : (
