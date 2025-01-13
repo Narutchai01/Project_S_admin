@@ -57,5 +57,14 @@ export const addAcne = async (formData: FormData) => {
   return response;
 }
 
+export const fectchAcneById = async (id: string) => {
+  const response = await fetchInstance(`/acne/${id}`, {
+    method: "GET",
+  }).catch((error) => {
+    console.error("Error:", error);
+    return error;
+  });
+  return response;
+}
 
 

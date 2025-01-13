@@ -5,7 +5,7 @@ import SideBar from "@/components/SideBar";
 import React, { useState, ReactNode, createContext, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { fecthAdmin } from "@/serverAction/server_action";
-import { Data } from "@/interface/admin";
+import { AcneItem, Data } from "@/interface/admin";
 import HeaderItem from "@/components/HeaderItem";
 import HeaderAdd from "@/components/HeaderAdd";
 import { SkincareItem } from "@/interface/admin";
@@ -16,6 +16,8 @@ interface DashBoardContextType {
   isOpen?: boolean;
   skincareItem?: SkincareItem | null;
   setSkincareItem?: (skincareItem: SkincareItem | null) => void;
+  acneItem?: AcneItem | null;
+  setAcneItem?: (acneItem: AcneItem | null) => void;
 }
 
 export const DashBoardContext = createContext<DashBoardContextType | undefined>(
@@ -29,6 +31,7 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   const [itemName, setItemName] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [skincareItem, setSkincareItem] = useState<SkincareItem | null>(null);
+  const [acneItem, setAcneItem] = useState<AcneItem | null>(null);
 
   useEffect(() => {
     fecthAdmin().then((res) => {
@@ -39,7 +42,7 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   
 
   return (
-    <DashBoardContext.Provider value={{ setItemName ,isOpen , setIsOpen, skincareItem, setSkincareItem }}>
+    <DashBoardContext.Provider value={{ setItemName ,isOpen , setIsOpen, skincareItem, setSkincareItem, acneItem, setAcneItem }}>
       <div className="jun-layout">
         <header className="jun-header jun-header-h-[3.5rem]">
           {pathname.length > 3 ? (
