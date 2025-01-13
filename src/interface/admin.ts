@@ -31,6 +31,17 @@ export type Data = {
   error: string | null;
 }
 
+export type AcneItem  = {
+  id: string;
+  name: string;
+  image: string;
+};
+
+export type AcneResponse = {
+  status: boolean;
+  data: AcneItem[];
+  error: string | null;
+}
 export interface IHeaderItems {
   itemName: string;
   setIsOpen: (value: boolean) => void;

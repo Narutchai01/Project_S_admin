@@ -2,9 +2,7 @@ export const fetchInstance = async (url: string, options = {}) => {
   const baseUrl = String(process.env.NEXT_PUBLIC_API_URL);
 
   const defaultOptions = {
-    headers: {
-      "Content-Type": "application/json",
-    },
+    method: 'GET', // Default method
   };
 
   const mergedOptions = { ...defaultOptions, ...options };
@@ -15,11 +13,12 @@ export const fetchInstance = async (url: string, options = {}) => {
     const response = await fetch(fullUrl, mergedOptions);
 
     if (!response.ok) {
-      const errorDetails = await response.json();
-      throw new Error(errorDetails.message || "An error occurred");
+      const errorDetails = await response.text();
+      throw new Error(errorDetails || "An error occurred");
     }
 
-    return await response.json();
+    const responseText = await response.text();
+    return responseText ? JSON.parse(responseText) : {};
   } catch (error) {
     console.error("Fetch error:", error);
     throw error;
