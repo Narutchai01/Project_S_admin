@@ -30,3 +30,12 @@ export type Data = {
   data: IAdmin| null | undefined; 
   error: string | null;
 }
+
+export interface IHeaderItems {
+  itemName: string;
+  setIsOpen: (value: boolean) => void;
+}
+
+export interface IEditDetailProps {
+  isOpen: boolean;
+}
