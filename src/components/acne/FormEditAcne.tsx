@@ -14,13 +14,13 @@ import {
 } from "@nextui-org/react";
 import {AcneItem} from "@/interface/admin";
 
-interface FromEditAcne {
+interface FormEditAcne {
   isOpen: boolean;
   onOpenChange: () => void;
   acne: AcneItem;
 }
 
-const FormEditAcne: FC<FromEditAcne> = (props) => {
+const FormEditAcne: FC<FormEditAcne> = (props) => {
   const [image, setImage] = useState<File | null>(null);
   const { isOpen, onOpenChange, acne } = props;
   return (

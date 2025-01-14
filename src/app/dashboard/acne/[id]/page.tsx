@@ -1,57 +1,70 @@
 "use client";
-import React, { useEffect, useState, useContext } from "react";
-import { fectchAcneById } from "@/serverAction/acne";
-import AcneDetail from "@/components/acne/acneDetail";
+import React, { FC, useState, useEffect, useContext }from "react";
 import { DashBoardContext } from "@/app/dashboard/layout";
+import { IAcneByIDpageProps, AcneItem } from "@/interface/admin";
+import { fectchAcneById } from "@/serverAction/acne";
+import { Textarea } from "@nextui-org/react";
+import Image from "next/image";
+import FormEditAcne from "@/components/acne/FormEditAcne";
 
-const AcneByIdPage = ({ params }: { params: Promise<{ id: string }> }) => {
+const AcneByIdPage: FC<IAcneByIDpageProps> = ({ params }) => {
   const [id, setId] = useState<string>("");
   const context = useContext(DashBoardContext);
-  const { setItemName, acneItem, setAcneItem } = context!;
+  const { setItemName, isOpen, onOpenChange } = context!;
+  const [acne, setAcne] = useState<AcneItem>();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const resolvedParams = await params;
-      const id = String(resolvedParams.id);
-      console.log("Fetched ID from params:", id);
+    params.then((params) => {
+      const id = String(params.id);
       setId(id);
+    });
+    fectchAcneById(id)
+      .then((response) => {
+        const data = response.data;
+        setAcne(data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+    
+    if (acne?.name) {
+      setItemName(acne.name);
+    }
+  }, [acne?.name, id, params, setItemName]);
 
-      if (id) {
-        try {
-          const response = await fectchAcneById(id);
-          if (response?.data) {
-            console.log("Fetched acne data:", response.data);
-            if (setAcneItem) {
-              setAcneItem(response.data);
-            }
-            setItemName(response.data.name || "");
-          } else {
-            console.warn("No acne data found for ID:", id);
-          }
-        } catch (error) {
-          console.error("Error fetching acne by ID:", error);
-        }
-      }
-    };
-
-    fetchData();
-  }, [params, setItemName, setAcneItem]);
+  console.log("acne", acne);
 
   return (
-    <div className="flex flex-col items-center w-full gap-6 p-6">
-      <div className="flex flex-col justify-center items-center w-full">
-        {acneItem ? (
-          <AcneDetail acneItem={acneItem} readOnly={true} />
-        ) : id ? (
-          <div className="text-center">
-            <h1 className="text-titleCrad text-black mt-4">Acne Not Found</h1>
+    <div className="flex justify-center items-center">
+      <div className="max-w-6xl w-full rounded-xl">
+        <div className="flex justify-center mb-4 mt-4">
+          <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
+            {acne && acne.image && (
+              <Image
+                src={acne.image}
+                alt={acne.name}
+                layout="fill"
+                objectFit="cover"
+              />
+            )}
           </div>
-        ) : (
-          <div className="text-center">
-            <h1 className="text-titleCrad text-black">Loading...</h1>
-          </div>
-        )}
+        </div>
+        <div className="bg-white rounded-xl shadow-md border p-6">
+          <h2 className="text-titleCrad text-Quartz mb-2">Acne</h2>
+          <Textarea
+            className="max-w-full h-10 text-contentCrad mb-2"
+            value={acne?.name}
+            readOnly={true}
+          />
+        </div>
       </div>
+      {acne && (
+        <FormEditAcne
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          acne={acne}
+        />
+      )}
     </div>
   );
 };
