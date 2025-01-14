@@ -65,14 +65,14 @@ const FormEditAcne: FC<FormEditAcne> = (props) => {
                    </div>
                    <form
                      action={(formData: FormData) => updateAcne(acne.id, formData)}
-                     className="p-6 flex justify-center flex-col items-center"
+                     className="p-2 flex justify-center flex-col items-center"
                    >
                      <Input
                        placeholder="upload image"
                        type="file"
                        name="file"
                        variant="bordered"
-                       className="max-w-[220px]"
+                       className="max-w-[220px] mb-6"
                        onChange={(e) => {
                          const file = e.target.files?.[0];
                          if (file) {
@@ -94,7 +94,7 @@ const FormEditAcne: FC<FormEditAcne> = (props) => {
                      </div>
                      <Button
                        type="submit"
-                       className="bg-Bittersweet font-bold text-white"
+                       className="bg-Bittersweet font-bold text-white mt-6"
                        onPress={() => {
                          onClose();
                          window.location.reload();

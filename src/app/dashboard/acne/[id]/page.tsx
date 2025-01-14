@@ -37,7 +37,7 @@ const AcneByIdPage: FC<IAcneByIDpageProps> = ({ params }) => {
   return (
     <div className="flex justify-center items-center">
       <div className="max-w-6xl w-full rounded-xl">
-        <div className="flex justify-center mb-4 mt-4">
+        <div className="flex justify-center mb-6 mt-4">
           <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
             {acne && acne.image && (
               <Image

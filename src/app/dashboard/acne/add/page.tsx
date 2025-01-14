@@ -1,4 +1,4 @@
-import FormAddAcne from "@/components/acne/formAcne";
+import FormAddAcne from "@/components/acne/formAddAcne";
 import React from "react";
 
 const AddAcnePage = () => {
