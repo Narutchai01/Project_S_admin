@@ -18,15 +18,19 @@ export const handlerLogin = async (formData: FormData) => {
 
   const response = await fetchInstance("/admin/login", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
   }).catch((error) => {
     console.error("Error:", error);
+    return error;
   });
 
-  if (response && response.data) {
+  if (response) {
     await cookieStore.set({
       name: "token",
-      value: response.data?.token,
+      value: response.data.token,
     });
   }
 
@@ -48,8 +52,7 @@ export const fecthAdmin = async () => {
   const token = await cookieStore.get("token");
   const response = await fetchInstance("/admin/profile", {
     headers: {
-      token:
-        token?.value ,
+      token: token?.value,
     },
     method: "GET",
   }).catch((error) => {
@@ -79,13 +82,12 @@ export const fectchSkincareById = async (id: string) => {
   return response;
 };
 
-export const getToken = async() => {
+export const getToken = async () => {
   await CheckCookie();
   const cookieStore = await cookies();
   const token = await cookieStore.get("token");
   return token?.value;
-}
-
+};
 
 export const addSkincare = async (formData: FormData) => {
   await CheckCookie();

@@ -1,8 +1,9 @@
+
 export const fetchInstance = async (url: string, options = {}) => {
   const baseUrl = String(process.env.NEXT_PUBLIC_API_URL);
 
   const defaultOptions = {
-    method: 'GET', // Default method
+    method: "GET",
   };
 
   const mergedOptions = { ...defaultOptions, ...options };
@@ -11,16 +12,8 @@ export const fetchInstance = async (url: string, options = {}) => {
 
   try {
     const response = await fetch(fullUrl, mergedOptions);
-
-    if (!response.ok) {
-      const errorDetails = await response.text();
-      throw new Error(errorDetails || "An error occurred");
-    }
-
-    const responseText = await response.text();
-    return responseText ? JSON.parse(responseText) : {};
+    return await response.json();
   } catch (error) {
     console.error("Fetch error:", error);
-    throw error;
   }
 };
