@@ -31,9 +31,10 @@ export type Data = {
 };
 
 export type AcneItem  = {
-  id: string;
+  id: number;
   name: string;
   image: string;
+  create_by: number;
 };
 
 export type AcneResponse = {
@@ -48,4 +49,12 @@ export interface IHeaderItemsProps {
 
 export interface IEditDetailProps {
   isOpen: boolean;
+}
+
+export interface IacneProps {
+  acnes: AcneItem[];
+}
+
+export interface IAcneByIDpageProps {
+  params: Promise<{ id: string }>;
 }
