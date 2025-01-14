@@ -12,7 +12,7 @@ const FormAddAcne = () => {
   return (
     <div className="max-w-6xl w-full bg-white rounded-xl p-6">
       <form action={addAcne}>
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-4 mt-4">
           <div className="w-[350px] h-[360px] shadow-xl flex justify-center items-center rounded-xl overflow-hidden">
             {image ? (
               <Image
@@ -31,7 +31,7 @@ const FormAddAcne = () => {
             )}
           </div>
         </div>
-        <div className="flex justify-center mt-2">
+        <div className="flex justify-center mt-4">
           <Input
             placeholder="upload image"
             type="file"

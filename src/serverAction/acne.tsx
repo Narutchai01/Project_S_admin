@@ -67,4 +67,17 @@ export const fectchAcneById = async (id: string) => {
   return response;
 }
 
+export const updateAcne = async ( id: number, formData: FormData) => {
+  formData.append("image", formData.get("file") as Blob);
+  const response = await fetchInstance(`/admin/acne/${id}`, {
+    method: "PUT",
+    body: formData,
+  }).catch((error) => {
+    console.error("Error:", error);
+    return error;
+  });
+  return response;
+}
+
+
 
