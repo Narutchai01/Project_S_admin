@@ -12,7 +12,7 @@ const dataSideBar = [
   },
   {
     title: "Skin Types",
-    link: "/dashboard/skincare1",
+    link: "/dashboard/skin",
   },
   {
     title: "Acne Types",
