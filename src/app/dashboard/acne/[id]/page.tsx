@@ -1,17 +1,17 @@
 "use client";
 import React, { FC, useState, useEffect, useContext }from "react";
 import { DashBoardContext } from "@/app/dashboard/layout";
-import { IAcneByIDpageProps, AcneItem } from "@/interface/admin";
+import {IAcneByIdpageProps, Iacne} from "@/interface/acne"
 import { fectchAcneById } from "@/serverAction/acne";
 import { Textarea } from "@nextui-org/react";
 import Image from "next/image";
 import FormEditAcne from "@/components/acne/FormEditAcne";
 
-const AcneByIdPage: FC<IAcneByIDpageProps> = ({ params }) => {
+const AcneByIdPage: FC<IAcneByIdpageProps> = ({ params }) => {
   const [id, setId] = useState<string>("");
   const context = useContext(DashBoardContext);
   const { setItemName, isOpen, onOpenChange } = context!;
-  const [acne, setAcne] = useState<AcneItem>();
+  const [acne, setAcne] = useState<Iacne>();
 
   useEffect(() => {
     params.then((params) => {

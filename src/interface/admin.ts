@@ -30,18 +30,6 @@ export type Data = {
   error: string | null;
 };
 
-export type AcneItem  = {
-  id: number;
-  name: string;
-  image: string;
-  create_by: number;
-};
-
-export type AcneResponse = {
-  status: boolean;
-  data: AcneItem[];
-  error: string | null;
-}
 export interface IHeaderItemsProps {
   itemName: string;
   onOpen: () => void;
@@ -51,10 +39,3 @@ export interface IEditDetailProps {
   isOpen: boolean;
 }
 
-export interface IacneProps {
-  acnes: AcneItem[];
-}
-
-export interface IAcneByIDpageProps {
-  params: Promise<{ id: string }>;
-}
