@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useState } from "react";
 import { Input, Textarea, Button } from "@nextui-org/react";
 import { ImagePlus } from "lucide-react";
 import Image from "next/image";
-import { addSkin } from "@/serverAction/skin";
+import { addAcne } from "@/serverAction/acne";
 
 function FormAddSkin() {
     const [image, setImage] = useState<File | null>(null);
@@ -32,7 +34,7 @@ function FormAddSkin() {
                     </div>
                 </div>
                 <form
-                    action={addSkin}
+                    action={addAcne}
                     className="p-6 flex justify-center flex-col items-center"
                 >
                     <Input

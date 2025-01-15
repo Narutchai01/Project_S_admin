@@ -8,7 +8,7 @@ export interface Iskin {
   export interface IskinProps {
     skins: Iskin[];
   }
-  export interface IskinByIDpageProps {
+  export interface IskinByIdpageProps {
     params: Promise<{ id: string }>;
   }
   

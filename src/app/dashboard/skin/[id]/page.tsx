@@ -1,24 +1,25 @@
 "use client";
+
 import React, { FC, useState, useEffect, useContext } from "react";
-import {IskinByIDpageProps, IskinProps} from "@/interface/skin";
+import {IskinByIdpageProps, Iskin} from "@/interface/skin";
 import {DashBoardContext} from "../../layout";
-import {fetchSkinById} from "@/serverAction/skin";
+import { fectchAcneById } from "@/serverAction/acne";
 import {Textarea} from "@nextui-org/react";
 import Image from "next/image";
 import FormEditSkin from "@/components/skin/formEditSkin";
 
-const SkinByIDpage: FC<IskinByIDpageProps> = ({params}) => {
+const SkinByIdpage: FC<IskinByIdpageProps> = ({params}) => {
   const context = useContext(DashBoardContext);
   const {setItemName, isOpen, onOpenChange} = context!;
   const [id, setId] = useState<string>("");
-  const [skin, setSkin] = useState<IskinProps>();
+  const [skin, setSkin] = useState<Iskin>();
 
   useEffect(() => {
     params.then((params) => {
       const id = String(params.id);
       setId(id);
     });
-    fetchSkinById(id)
+    fectchAcneById(id)
       .then((response) => {
         const data = response.data;
         setSkin(data);
@@ -69,4 +70,4 @@ const SkinByIDpage: FC<IskinByIDpageProps> = ({params}) => {
     );
 }
 
-export default SkinByIDpage;
+export default SkinByIdpage;

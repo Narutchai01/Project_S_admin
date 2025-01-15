@@ -38,7 +38,7 @@ export const addSkin = async (formData: FormData) => {
     return error;
   });
   return response;
-}
+};
 
 export const fetchSkinById = async (id: string) => {
   const response = await fetchInstance(`/skin/${id}`, {
@@ -47,7 +47,7 @@ export const fetchSkinById = async (id: string) => {
     console.error("Error:", error);
   });
   return response;
-}
+};
 
 export const updateSkin = async (id: number, formData: FormData) => {
   formData.append("image", formData.get("file") as Blob);
@@ -59,4 +59,4 @@ export const updateSkin = async (id: number, formData: FormData) => {
     return error;
   });
   return response;
-}
+};
