@@ -14,7 +14,7 @@ function FormAddFacial() {
             {image ? (
               <Image
                 src={URL.createObjectURL(image)}
-                alt="skincare"
+                alt="facial"
                 width={350}
                 height={360}
                 style={{
@@ -32,14 +32,14 @@ function FormAddFacial() {
         </div>
         <form
           action={addFacial}
-          className="p-6 flex justify-center flex-col items-center"
+          className="p-2 flex justify-center flex-col items-center"
         >
           <Input
             placeholder="upload image"
             type="file"
             name="file"
             variant="bordered"
-            className="max-w-[220px]"
+            className="max-w-[220px] mb-6"
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
@@ -56,7 +56,7 @@ function FormAddFacial() {
               readOnly={false}
             />
           </div>
-          <Button type="submit" className="bg-Bittersweet font-bold text-white">
+          <Button type="submit" className="bg-Bittersweet font-bold text-white mt-6">
             Add Skincare
           </Button>
         </form>
