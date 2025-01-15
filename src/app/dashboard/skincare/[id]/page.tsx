@@ -1,62 +1,76 @@
 "use client";
-import React, { useEffect, useState, useContext } from "react";
-import { fectchSkincareById } from "@/serverAction/server_action";
-import SkincareDetails from "@/components/skincareDetails";
+import React, { FC, useEffect, useState, useContext } from "react";
+import { Textarea } from "@nextui-org/react";
+import Image from "next/image";
+import { ISkincareByIDpageProps, Iskincare } from "@/interface/skincare";
 import { DashBoardContext } from "../../layout";
+import { fectchSkincareById } from "@/serverAction/skincare";
+import FromEditSkincare from "@/components/skincare/formEditSkincare";
 
-const SkincareByIdPage = ({ params }: { params: Promise<{ id: string }> }) => {
-  const [id, setId] = useState<string>("");
-  // const [skincareItem, setSkincareItem] = useState<SkincareItem | null>(null);
+const SkincareByIdPage: FC<ISkincareByIDpageProps> = ({ params }) => {
   const context = useContext(DashBoardContext);
-  const { setItemName , skincareItem , setSkincareItem } = context!;
+  const { setItemName, isOpen, onOpenChange } = context!;
+  const [id, setId] = useState<string>("");
+  const [skincare, setSkincare] = useState<Iskincare>();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const resolvedParams = await params;
-      const id = String(resolvedParams.id);
-      console.log("Fetched ID from params:", id);
+    params.then((params) => {
+      const id = String(params.id);
       setId(id);
+    });
+    fectchSkincareById(id)
+      .then((response) => {
+        const data = response.data;
+        setSkincare(data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
 
-      if (id) {
-        try {
-          const response = await fectchSkincareById(id);
-          if (response?.data) {
-            console.log("Fetched skincare data:", response.data);
-            if (setSkincareItem) {
-              setSkincareItem(response.data);
-            }
-            setItemName(response.data.name || "");
-          } else {
-            console.warn("No skincare data found for ID:", id);
-          }
-        } catch (error) {
-          console.error("Error fetching skincare by ID:", error);
-        }
-      }
-    };
+    if (skincare?.name) {
+      setItemName(skincare.name);
+    }
+  }, [skincare?.name, id, params, setItemName]);
 
-    fetchData();
-  }, [params, setItemName, setSkincareItem]);
-
-
+  console.log("skincare", skincare);
 
   return (
-    <div className="flex flex-col items-center w-full gap-6 p-6">
-        <div className="flex flex-col justify-center items-center w-full">
-        {skincareItem ? (
-          <SkincareDetails skincareItem={skincareItem} readOnly={true} />
-        ) : id ? (
-          <div className="text-center">
-            <h1 className="text-titleCrad text-black mt-4">
-              Skincare Not Found
-            </h1>
+    <div className="flex justify-center items-center">
+      <div className="max-w-6xl w-full rounded-xl">
+        <div className="flex justify-center mb-6 mt-4">
+          <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
+            {skincare && skincare.image && (
+              <Image
+                src={skincare.image}
+                alt={skincare.name}
+                layout="fill"
+                objectFit="cover"
+              />
+            )}
           </div>
-        ) : (
-          <div className="text-center">
-            <h1 className="text-titleCrad text-black">Loading...</h1>
-          </div>
-        )}
+        </div>
+        <div className="bg-white rounded-xl shadow-md border p-6">
+          <h2 className="text-titleCrad text-Quartz mb-2">Skincare</h2>
+          <Textarea
+            className="max-w-full h-10 text-contentCrad mb-4"
+            value={skincare?.name}
+            readOnly={true}
+          />
+          <h2 className="text-titleCrad text-Quartz mb-2">Description</h2>
+          <Textarea
+            className="max-w-full h-10 text-contentCrad mb-2"
+            value={skincare?.description}
+            readOnly={true}
+          />
+        </div>
       </div>
+      {skincare && (
+        <FromEditSkincare
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          skincare={skincare}
+        />
+      )}
     </div>
   );
 };

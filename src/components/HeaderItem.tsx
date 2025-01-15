@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { IHeaderItemsProps } from "@/interface/admin";
 import { Button } from "@nextui-org/react";
 import { FilePenLine } from "lucide-react";
-import EditDetail from "./editDetail";
+// import EditDetail from "./editDetail";
 
 
 
@@ -24,7 +24,7 @@ const HeaderItem: FC<IHeaderItemsProps> = (props) => {
           <FilePenLine />
         </Button>
       </div>
-      <EditDetail />
+      {/* <EditDetail /> */}
     </div>
   );
 };

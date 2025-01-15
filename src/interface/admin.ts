@@ -3,20 +3,6 @@ export type Ilogin = {
   password: string;
 };
 
-export type SkincareItem = {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  create_by: number;
-};
-
-export type SkincareResponse = {
-  status: boolean;
-  data: SkincareItem[];
-  error: string | null;
-};
-
 export interface IAdmin {
   id: number;
   full_name: string;
