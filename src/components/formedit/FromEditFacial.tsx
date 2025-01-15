@@ -32,7 +32,7 @@ const FromEditFacial: FC<FromEditFacial> = (props) => {
             <ModalBody>
               <div className="flex justify-center items-center">
                 <div className="max-w-6xl w-full rounded-xl">
-                  <div className="flex justify-center mb-4 mt-4">
+                  <div className="flex justify-center mt-4">
                     <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
                       {image ? (
                         <Image
@@ -70,7 +70,7 @@ const FromEditFacial: FC<FromEditFacial> = (props) => {
                       type="file"
                       name="file"
                       variant="bordered"
-                      className="max-w-[220px]"
+                      className="max-w-[220px] mb-6"
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
@@ -92,7 +92,7 @@ const FromEditFacial: FC<FromEditFacial> = (props) => {
                     </div>
                     <Button
                       type="submit"
-                      className="bg-Bittersweet font-bold text-white"
+                      className="bg-Bittersweet font-bold text-white mt-6"
                       onPress={() => {
                         onClose();
                         window.location.reload();
