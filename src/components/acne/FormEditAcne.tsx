@@ -2,7 +2,7 @@
 
 import React, { useState, FC } from "react";
 import Image from "next/image";
-import { updateAcne } from "@/serverAction/acne";
+import {updateAcne} from "@/serverAction/acne";
 import {
   Textarea,
   Modal,
@@ -12,12 +12,12 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
-import {AcneItem} from "@/interface/admin";
+import {Iacne} from "@/interface/acne";
 
 interface FormEditAcne {
   isOpen: boolean;
   onOpenChange: () => void;
-  acne: AcneItem;
+  acne: Iacne;
 }
 
 const FormEditAcne: FC<FormEditAcne> = (props) => {
@@ -86,7 +86,7 @@ const FormEditAcne: FC<FormEditAcne> = (props) => {
                        </h2>
                        <Textarea
                          className="max-w-full h-10 text-contentCrad mb-2"
-                         placeholder="Facial Name"
+                         placeholder="Acne Name"
                          name="name"
                          defaultValue={acne.name}
                          readOnly={false}
