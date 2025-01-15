@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import { IskinProps } from "@/interface/skin";
-import { deleteSkin } from "@/serverAction/skin";
+import { deleteFacial } from "@/serverAction/facial";
 
 const SkinTable: FC<IskinProps> = (props) => {
   const { skins } = props;
@@ -45,7 +45,7 @@ const SkinTable: FC<IskinProps> = (props) => {
                       type="button"
                       className="text-Bittersweet text-contentTable border border-red-500 px-4 py-2 rounded-xl hover:bg-red-50"
                       onClick={() => {
-                        deleteSkin(item.id);
+                        deleteFacial(item.id);
                         window.location.reload();
                       }}
                     >

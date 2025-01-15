@@ -3,7 +3,7 @@
 import React, { FC, useState, useEffect, useContext } from "react";
 import {IskinByIdpageProps, Iskin} from "@/interface/skin";
 import {DashBoardContext} from "../../layout";
-import { fectchAcneById } from "@/serverAction/acne";
+import { fecthFacialByID } from "@/serverAction/facial";
 import {Textarea} from "@nextui-org/react";
 import Image from "next/image";
 import FormEditSkin from "@/components/skin/formEditSkin";
@@ -19,7 +19,7 @@ const SkinByIdpage: FC<IskinByIdpageProps> = ({params}) => {
       const id = String(params.id);
       setId(id);
     });
-    fectchAcneById(id)
+    fecthFacialByID(id)
       .then((response) => {
         const data = response.data;
         setSkin(data);
@@ -38,7 +38,7 @@ const SkinByIdpage: FC<IskinByIdpageProps> = ({params}) => {
     return (
         <div className="flex justify-center items-center">
             <div className="max-w-6xl w-full rounded-xl">
-                <div className="flex justify-center mb-4 mt-4">
+                <div className="flex justify-center mb-6 mt-4">
                     <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
                         {skin && skin.image && (
                             <Image

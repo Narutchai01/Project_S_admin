@@ -2,7 +2,7 @@
 
 import React, { useState, FC } from "react";
 import Image from "next/image";
-import { updateAcne } from "@/serverAction/acne";
+import { updateFacial } from "@/serverAction/facial";
 import {
   Textarea,
   Modal,
@@ -35,7 +35,7 @@ const FormEditSkin: FC<FormEditSkin> = (props) => {
             <ModalBody>
               <div className="flex justify-center items-center">
                 <div className="max-w-6xl w-full rounded-xl">
-                  <div className="flex justify-center mb-4 mt-4">
+                  <div className="flex justify-center mt-4">
                     <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
                       {image ? (
                         <Image
@@ -66,7 +66,7 @@ const FormEditSkin: FC<FormEditSkin> = (props) => {
                   </div>
                   <form
                     action={(formData: FormData) =>
-                      updateAcne(skin.id, formData)
+                      updateFacial(skin.id, formData)
                     }
                     className="p-6 flex justify-center flex-col items-center"
                   >
@@ -75,7 +75,7 @@ const FormEditSkin: FC<FormEditSkin> = (props) => {
                       type="file"
                       name="file"
                       variant="bordered"
-                      className="max-w-[220px]"
+                      className="max-w-[220px] mb-6"
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
@@ -97,7 +97,7 @@ const FormEditSkin: FC<FormEditSkin> = (props) => {
                     </div>
                     <Button
                       type="submit"
-                      className="bg-Bittersweet font-bold text-white"
+                      className="bg-Bittersweet font-bold text-white mt-6"
                       onPress={() => {
                         onClose();
                         window.location.reload();
