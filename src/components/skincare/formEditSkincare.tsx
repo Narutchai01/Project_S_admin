@@ -34,7 +34,7 @@ const FormEditSkincare: FC<FormEditSkincare> = (props) => {
             <ModalBody>
               <div className="flex justify-center items-center">
                 <div className="max-w-6xl w-full rounded-xl">
-                  <div className="flex justify-center mt-4">
+                  <div className="flex justify-center">
                     <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
                       {image ? (
                         <Image
@@ -67,14 +67,14 @@ const FormEditSkincare: FC<FormEditSkincare> = (props) => {
                     action={(formData: FormData) =>
                       updateSkincare(skincare.id, formData)
                     }
-                    className="p-6 flex justify-center flex-col items-center"
+                    className="p-4 flex justify-center flex-col items-center"
                   >
                     <Input
                       placeholder="upload image"
                       type="file"
                       name="file"
                       variant="bordered"
-                      className="max-w-[220px] mb-6"
+                      className="max-w-[220px] mb-4"
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
@@ -107,7 +107,7 @@ const FormEditSkincare: FC<FormEditSkincare> = (props) => {
                     </div>
                     <Button
                       type="submit"
-                      className="bg-Bittersweet font-bold text-white mt-6"
+                      className="bg-Bittersweet font-bold text-white mt-4"
                       onPress={() => {
                         onClose();
                         window.location.reload();
