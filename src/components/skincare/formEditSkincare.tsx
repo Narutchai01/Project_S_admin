@@ -113,7 +113,7 @@ const FormEditSkincare: FC<FormEditSkincare> = (props) => {
                         window.location.reload();
                       }}
                     >
-                      Update Skincare
+                      Update
                     </Button>
                   </form>
                 </div>
