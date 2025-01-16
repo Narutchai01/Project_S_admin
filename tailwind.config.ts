@@ -18,6 +18,7 @@ export default {
         Snow: '#FCFAFD',
         Black: '#000000',
         White: '#FFFFFF',
+        LightSilver: '#D9D9D9',
       },
       fontFamily: {
         Lexend: ['Lexend', 'sans-serif'],
