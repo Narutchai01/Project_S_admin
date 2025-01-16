@@ -11,12 +11,18 @@ import Link from "next/link";
 import { IacneProps } from "@/interface/acne";
 import { deleteAcne } from "@/serverAction/acne";
 
-const AcneTable: FC<IacneProps> = (props) =>{
-    const {acnes} = props;
-    const sortAcnes = acnes.sort((a, b) => a.id - b.id);
+const AcneTable: FC<IacneProps> = (props) => {
+  const { acnes } = props;
+  const sortAcnes = acnes.sort((a, b) => a.id - b.id);
 
-    return (
-        <Table aria-label="Skincare Table" removeWrapper className="rounded-2xl">
+  return (
+    <div className="p-6 font-Lexend">
+      <div className="w-full max-w-5xl mx-auto rounded-2xl border border-gray-200 shadow-md">
+        <Table
+          aria-label="Skincare Table"
+          removeWrapper
+          className="rounded-2xl"
+        >
           <TableHeader>
             <TableColumn className="text-titleTable">ID</TableColumn>
             <TableColumn className="text-titleTable">Name</TableColumn>
@@ -25,24 +31,32 @@ const AcneTable: FC<IacneProps> = (props) =>{
           <TableBody emptyContent={"No rows to display."} items={sortAcnes}>
             {(item) => (
               <TableRow key={item.id} className="border-b border-gray-200">
-                <TableCell><Link href={`/dashboard/acne/${item.id}`}>{item.id}</Link></TableCell>
-                <TableCell><Link href={`/dashboard/acne/${item.id}`}>{item.name}</Link></TableCell>
                 <TableCell>
-                  <button
-                    type="button"
-                    className="text-Bittersweet text-contentTable border border-red-500 px-4 py-2 rounded-xl hover:bg-red-50"
-                    onClick={() => {
+                  <Link href={`/dashboard/acne/${item.id}`}>{item.id}</Link>
+                </TableCell>
+                <TableCell>
+                  <Link href={`/dashboard/acne/${item.id}`}>{item.name}</Link>
+                </TableCell>
+                <TableCell>
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      className="text-Bittersweet text-contentTable border border-red-500 px-4 py-2 rounded-xl hover:bg-red-50"
+                      onClick={() => {
                         deleteAcne(item.id);
-                      window.location.reload();
-                    }}
-                  >
-                    Delete
-                  </button>
+                        window.location.reload();
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-      );
-    };
-    export default AcneTable;
+      </div>
+    </div>
+  );
+};
+export default AcneTable;
