@@ -46,6 +46,13 @@ export const CheckCookie = async () => {
   }
 };
 
+export const getToken = async () => {
+  await CheckCookie();
+  const cookieStore = await cookies();
+  const token = await cookieStore.get("token");
+  return token?.value;
+};
+
 export const fecthAdmin = async () => {
   await CheckCookie();
   const cookieStore = await cookies();
@@ -55,51 +62,6 @@ export const fecthAdmin = async () => {
       token: token?.value,
     },
     method: "GET",
-  }).catch((error) => {
-    console.error("Error:", error);
-    return error;
-  });
-  return response;
-};
-
-export const fectchSkincares = async () => {
-  const response = await fetchInstance("/skincare", {
-    method: "GET",
-  }).catch((error) => {
-    console.error("Error:", error);
-    return error;
-  });
-  return response;
-};
-
-export const fectchSkincareById = async (id: string) => {
-  const response = await fetchInstance(`/skincare/${id}`, {
-    method: "GET",
-  }).catch((error) => {
-    console.error("Error:", error);
-    return error;
-  });
-  return response;
-};
-
-export const getToken = async () => {
-  await CheckCookie();
-  const cookieStore = await cookies();
-  const token = await cookieStore.get("token");
-  return token?.value;
-};
-
-export const addSkincare = async (formData: FormData) => {
-  await CheckCookie();
-  const token = await getToken();
-
-  formData.append("image", formData.get("file") as Blob);
-  const response = await fetchInstance("/admin/skincare", {
-    method: "POST",
-    headers: {
-      token: token,
-    },
-    body: formData,
   }).catch((error) => {
     console.error("Error:", error);
     return error;

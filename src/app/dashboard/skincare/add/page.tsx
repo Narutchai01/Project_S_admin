@@ -1,4 +1,6 @@
-import FormAddSkincare from '@/components/FormAddSkincare'
+"use client";
+
+import FormAddSkincare from '@/components/skincare/formAddSkincare'
 import React from 'react'
 
 const AddSkinCarepage = () => {
