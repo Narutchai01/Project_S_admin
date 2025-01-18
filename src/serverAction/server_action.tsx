@@ -32,9 +32,11 @@ export const handlerLogin = async (formData: FormData) => {
       name: "token",
       value: response.data.token,
     });
+
+    redirect("/dashboard/skincare");
   }
 
-  redirect("/dashboard/skincare");
+  return response;
 };
 
 export const CheckCookie = async () => {
