@@ -13,6 +13,7 @@ import {
   Input,
 } from "@nextui-org/react";
 import {Iacne} from "@/interface/acne";
+import AlertSuccess from "@/components/alert/alertSuccess";
 
 interface FormEditAcne {
   isOpen: boolean;
@@ -23,7 +24,25 @@ interface FormEditAcne {
 const FormEditAcne: FC<FormEditAcne> = (props) => {
   const [image, setImage] = useState<File | null>(null);
   const { isOpen, onOpenChange, acne } = props;
+   const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+
+   const handleFormSubmit = async (formData: FormData) => {
+       try {
+         await updateAcne(acne.id, formData);
+         setSuccessModalOpen(true);
+       } catch (error) {
+         console.error("Error updating facial:", error);
+       }
+     };
+   
+     const handleSuccessClose = () => {
+       setSuccessModalOpen(false);
+       window.location.reload();
+     };
+   
+
   return (
+    <>
      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="full">
        <ModalContent>
          {(onClose) => (
@@ -64,7 +83,7 @@ const FormEditAcne: FC<FormEditAcne> = (props) => {
                      </div>
                    </div>
                    <form
-                     action={(formData: FormData) => updateAcne(acne.id, formData)}
+                     action={(formData: FormData) => handleFormSubmit(formData)}
                      className="p-2 flex justify-center flex-col items-center"
                    >
                      <Input
@@ -95,10 +114,7 @@ const FormEditAcne: FC<FormEditAcne> = (props) => {
                      <Button
                        type="submit"
                        className="bg-Bittersweet font-bold text-white mt-6"
-                       onPress={() => {
-                         onClose();
-                         window.location.reload();
-                       }}
+                       onPress={onClose}
                      >
                        Update
                      </Button>
@@ -110,6 +126,15 @@ const FormEditAcne: FC<FormEditAcne> = (props) => {
          )}
        </ModalContent>
      </Modal>
+
+<AlertSuccess
+isOpen={isSuccessModalOpen}
+onOpenChange={() => setSuccessModalOpen(false)}
+onClose={handleSuccessClose}
+>
+<p>Updated successfully!</p>
+</AlertSuccess>
+</>
    );
  };
  

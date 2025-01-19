@@ -11,6 +11,7 @@ import {
   Input,
 } from "@nextui-org/react";
 import { Ifacial } from "@/interface/facial";
+import AlertSuccess from "@/components/alert/alertSuccess";
 
 interface FromEditFacial {
   isOpen: boolean;
@@ -21,7 +22,25 @@ interface FromEditFacial {
 const FromEditFacial: FC<FromEditFacial> = (props) => {
   const [image, setImage] = useState<File | null>(null);
   const { isOpen, onOpenChange, facial } = props;
+   const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+
+   const handleFormSubmit = async (formData: FormData) => {
+    try {
+      await updateFacial(facial.id, formData);
+      setSuccessModalOpen(true);
+    } catch (error) {
+      console.error("Error updating facial:", error);
+    }
+  };
+
+  const handleSuccessClose = () => {
+    setSuccessModalOpen(false);
+    window.location.reload();
+  };
+
+  
   return (
+    <>
     <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="full">
       <ModalContent>
         {(onClose) => (
@@ -61,10 +80,12 @@ const FromEditFacial: FC<FromEditFacial> = (props) => {
                       )}
                     </div>
                   </div>
-                  <form
-                    action={(formData: FormData) => updateFacial(facial.id, formData)}
-                    className="p-6 flex justify-center flex-col items-center"
-                  >
+                   <form
+                      action={(formData: FormData) =>
+                        handleFormSubmit(formData)
+                      }
+                      className="p-6 flex justify-center flex-col items-center"
+                    >
                     <Input
                       placeholder="upload image"
                       type="file"
@@ -91,24 +112,31 @@ const FromEditFacial: FC<FromEditFacial> = (props) => {
                       />
                     </div>
                     <Button
-                      type="submit"
-                      className="bg-Bittersweet font-bold text-white mt-6"
-                      onPress={() => {
-                        onClose();
-                        window.location.reload();
-                      }}
-                    >
-                      Update
-                    </Button>
-                  </form>
+                        type="submit"
+                        className="bg-Bittersweet font-bold text-white mt-6"
+                        onPress={onClose}
+                      >
+                        Update
+                        </Button>
+                    </form>
+                  </div>
                 </div>
-              </div>
-            </ModalBody>
-          </>
-        )}
-      </ModalContent>
-    </Modal>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+
+      <AlertSuccess
+        isOpen={isSuccessModalOpen}
+        onOpenChange={() => setSuccessModalOpen(false)}
+        onClose={handleSuccessClose}
+      >
+        <p>Updated successfully!</p>
+      </AlertSuccess>
+    </>
   );
 };
+                  
 
 export default FromEditFacial;

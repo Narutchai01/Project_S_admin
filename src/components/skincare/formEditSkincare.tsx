@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import { Iskincare } from "@/interface/skincare";
 import { updateSkincare } from "@/serverAction/skincare";
+import AlertSuccess from "../alert/alertSuccess";
 
 interface FormEditSkincare {
   isOpen: boolean;
@@ -23,7 +24,25 @@ interface FormEditSkincare {
 const FormEditSkincare: FC<FormEditSkincare> = (props) => {
   const [image, setImage] = useState<File | null>(null);
   const { isOpen, onOpenChange, skincare } = props;
+
+     const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+  
+     const handleFormSubmit = async (formData: FormData) => {
+      try {
+        await updateSkincare(skincare.id, formData);
+        setSuccessModalOpen(true);
+      } catch (error) {
+        console.error("Error updating facial:", error);
+      }
+    };
+  
+    const handleSuccessClose = () => {
+      setSuccessModalOpen(false);
+      window.location.reload();
+    };
+
   return (
+    <>
     <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="full">
       <ModalContent>
         {(onClose) => (
@@ -65,7 +84,7 @@ const FormEditSkincare: FC<FormEditSkincare> = (props) => {
                   </div>
                   <form
                     action={(formData: FormData) =>
-                      updateSkincare(skincare.id, formData)
+                      handleFormSubmit(formData)
                     }
                     className="p-4 flex justify-center flex-col items-center"
                   >
@@ -123,6 +142,15 @@ const FormEditSkincare: FC<FormEditSkincare> = (props) => {
         )}
       </ModalContent>
     </Modal>
+
+    <AlertSuccess
+        isOpen={isSuccessModalOpen}
+        onOpenChange={() => setSuccessModalOpen(false)}
+        onClose={handleSuccessClose}
+      >
+        <p>Updated successfully!</p>
+      </AlertSuccess>
+    </>
   );
 };
 
