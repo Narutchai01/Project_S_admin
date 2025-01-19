@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
-      - development
+      - developments
   pull_request:
     branches:
       - main
-      - development
+      - developments
 
 jobs:
   eslint:
