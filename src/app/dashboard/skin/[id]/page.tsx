@@ -3,7 +3,7 @@
 import React, { FC, useState, useEffect, useContext } from "react";
 import {IskinByIdpageProps, Iskin} from "@/interface/skin";
 import {DashBoardContext} from "../../layout";
-import { fecthFacialByID } from "@/serverAction/facial";
+import { fetchSkinById } from "@/serverAction/skin";
 import {Textarea} from "@nextui-org/react";
 import Image from "next/image";
 import FormEditSkin from "@/components/skin/formEditSkin";
@@ -19,7 +19,7 @@ const SkinByIdpage: FC<IskinByIdpageProps> = ({params}) => {
       const id = String(params.id);
       setId(id);
     });
-    fecthFacialByID(id)
+    fetchSkinById(id)
       .then((response) => {
         const data = response.data;
         setSkin(data);
