@@ -17,10 +17,8 @@ jobs:
 
       # Step 2: Install Bun
       - name: Install Bun
-        run: |
-          curl -fsSL https://bun.sh/install | bash
-          echo 'export PATH="$HOME/.bun/bin:$PATH"' >> $GITHUB_ENV
-          source ~/.bashrc
+        run: curl -fsSL https://bun.sh/install | bash
+
           
       # Step 3: Install Dependencies with Bun
       - name: Install dependencies
