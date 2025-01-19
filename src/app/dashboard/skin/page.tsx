@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Iskin } from "@/interface/skin";
-import { fetchFacial } from "@/serverAction/facial";
+import { fetchSkin } from "@/serverAction/skin";
 import SkinTable from "@/components/skin/skinTable";
 
 const Skinpage = () => {
@@ -10,7 +10,7 @@ const Skinpage = () => {
 
   useEffect(() => {
     const fetchSkinData = async () => {
-      const response = await fetchFacial();
+      const response = await fetchSkin();
       setSkins(response.data);
     };
     fetchSkinData();

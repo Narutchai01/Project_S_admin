@@ -2,7 +2,7 @@
 
 import React, { useState, FC } from "react";
 import Image from "next/image";
-import { updateFacial } from "@/serverAction/facial";
+import { updateSkin } from "@/serverAction/skin";
 import {
   Textarea,
   Modal,
@@ -66,7 +66,7 @@ const FormEditSkin: FC<FormEditSkin> = (props) => {
                   </div>
                   <form
                     action={(formData: FormData) =>
-                      updateFacial(skin.id, formData)
+                      updateSkin(skin.id, formData)
                     }
                     className="p-6 flex justify-center flex-col items-center"
                   >
