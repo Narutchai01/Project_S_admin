@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Input, Textarea, Button } from "@nextui-org/react";
 import { ImagePlus } from "lucide-react";
 import Image from "next/image";
-import { addFacial } from "@/serverAction/facial";
+import { addSkin } from "@/serverAction/skin";
 import AlertAddItem from "@/components/alert/alertAddItem";
 
 function FormAddSkin() {
@@ -13,7 +13,7 @@ function FormAddSkin() {
 
   const handleFormSubmit = async (formData: FormData) => {
     try {
-      await addFacial(formData);
+      await addSkin(formData);
       setSuccessModalOpen(true);
     } catch (error) {
       console.error("Error adding skincare:", error);

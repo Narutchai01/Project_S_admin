@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -10,10 +10,34 @@ import {
 import Link from "next/link";
 import { IacneProps } from "@/interface/acne";
 import { deleteAcne } from "@/serverAction/acne";
+import AlertDelete from "@/components/alert/alertDelete";
+import AlertSuccess from "@/components/alert/alertSuccess";
 
 const AcneTable: FC<IacneProps> = (props) => {
   const { acnes } = props;
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+  const [selectedAcneId, setSelectedAcneId] = useState<number | null>(null);
+
   const sortAcnes = acnes.sort((a, b) => a.id - b.id);
+
+  const handleDelete = async () => {
+    try {
+      if (selectedAcneId !== null) {
+        await deleteAcne(selectedAcneId);
+        setDeleteModalOpen(false);
+        setSuccessModalOpen(true);
+      }
+    } catch (error) {
+      console.error("Error deleting facial:", error);
+      setDeleteModalOpen(false);
+    }
+  };
+
+  const handleSuccessClose = () => {
+    setSuccessModalOpen(false);
+    window.location.reload();
+  };
 
   return (
     <div className="p-6 font-Lexend">
@@ -43,8 +67,8 @@ const AcneTable: FC<IacneProps> = (props) => {
                       type="button"
                       className="text-Bittersweet text-contentTable border border-red-500 px-4 py-2 rounded-xl hover:bg-red-50"
                       onClick={() => {
-                        deleteAcne(item.id);
-                        window.location.reload();
+                        setSelectedAcneId(item.id);
+                        setDeleteModalOpen(true);
                       }}
                     >
                       Delete
@@ -56,6 +80,22 @@ const AcneTable: FC<IacneProps> = (props) => {
           </TableBody>
         </Table>
       </div>
+
+      <AlertDelete
+        isOpen={isDeleteModalOpen}
+        onOpenChange={() => setDeleteModalOpen(false)}
+        onDelete={handleDelete}
+      >
+        <p>Are you sure?</p>
+      </AlertDelete>
+
+      <AlertSuccess
+        isOpen={isSuccessModalOpen}
+        onOpenChange={() => {}}
+        onClose={handleSuccessClose}
+      >
+        <p>Deleted successfully!</p>
+      </AlertSuccess>
     </div>
   );
 };
