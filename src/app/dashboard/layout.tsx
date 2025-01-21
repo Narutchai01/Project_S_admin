@@ -58,7 +58,6 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
             <SideBar category={category} adminData={dataAdmin} />
           </div>
         </aside>
-        <footer className="jun-footer">Footer</footer>
       </div>
     </DashBoardContext.Provider>
   );

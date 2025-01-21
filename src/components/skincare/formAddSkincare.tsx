@@ -89,6 +89,7 @@ function FormAddSkincare() {
               />
             </div>
             <Button
+              id="add-skincare"
               type="submit"
               className="bg-Bittersweet font-bold text-white mt-6"
             >

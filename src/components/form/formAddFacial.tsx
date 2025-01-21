@@ -79,6 +79,7 @@ function FormAddFacial() {
               />
             </div>
             <Button
+              id="add-facial"
               type="submit"
               className="bg-Bittersweet font-bold text-white mt-6"
             >

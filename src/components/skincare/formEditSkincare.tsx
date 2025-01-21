@@ -125,6 +125,7 @@ const FormEditSkincare: FC<FormEditSkincare> = (props) => {
                       />
                     </div>
                     <Button
+                      id="update"
                       type="submit"
                       className="bg-Bittersweet font-bold text-white mt-4"
                       onPress={() => {

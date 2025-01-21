@@ -4,7 +4,7 @@ import React, { FC, useState, useEffect, useContext } from "react";
 import { IskinByIdpageProps, Iskin } from "@/interface/skin";
 import { DashBoardContext } from "../../layout";
 import { fetchSkinById } from "@/serverAction/skin";
-import { Textarea } from "@nextui-org/react";
+import { Spinner, Textarea } from "@nextui-org/react";
 import Image from "next/image";
 import FormEditSkin from "@/components/skin/formEditSkin";
 
@@ -40,13 +40,17 @@ const SkinByIdpage: FC<IskinByIdpageProps> = ({ params }) => {
       <div className="max-w-6xl w-full rounded-xl">
         <div className="flex justify-center mb-6 mt-4">
           <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
-            {skin && skin.image && (
+            {skin && skin.image ? (
               <Image
                 src={skin.image}
-                alt={skin.name}
-                fill
-                style={{ objectFit: "cover" }}
+                alt={skin.name || "No name available"}
+                layout="fill"
+                objectFit="cover"
               />
+            ) : (
+              <div className="flex justify-center items-center w-full h-full bg-gray-200">
+                <Spinner color="default" labelColor="foreground" size="lg" />
+              </div>
             )}
           </div>
         </div>

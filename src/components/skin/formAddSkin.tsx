@@ -81,6 +81,7 @@ function FormAddSkin() {
               />
             </div>
             <Button
+              id="add-skin"
               type="submit"
               className="bg-Bittersweet font-bold text-white mt-6"
             >

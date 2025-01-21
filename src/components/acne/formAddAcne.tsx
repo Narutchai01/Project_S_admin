@@ -80,7 +80,7 @@ const FormAddAcne = () => {
                 readOnly={false}
               />
             </div>
-            <Button type="submit" className="bg-Bittersweet font-bold text-white mt-6">
+            <Button id="add-acne" type="submit" className="bg-Bittersweet font-bold text-white mt-6">
               Add Acne
             </Button>
           </form>

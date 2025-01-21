@@ -112,6 +112,7 @@ const FromEditFacial: FC<FromEditFacial> = (props) => {
                       />
                     </div>
                     <Button
+                        id="add-skin"
                         type="submit"
                         className="bg-Bittersweet font-bold text-white mt-6"
                         onPress={onClose}
