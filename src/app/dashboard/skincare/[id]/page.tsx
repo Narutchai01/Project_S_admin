@@ -1,6 +1,6 @@
 "use client";
 import React, { FC, useEffect, useState, useContext } from "react";
-import { Textarea } from "@nextui-org/react";
+import { Spinner, Textarea } from "@nextui-org/react";
 import Image from "next/image";
 import { ISkincareByIDpageProps, Iskincare } from "@/interface/skincare";
 import { DashBoardContext } from "../../layout";
@@ -39,13 +39,17 @@ const SkincareByIdPage: FC<ISkincareByIDpageProps> = ({ params }) => {
       <div className="max-w-6xl w-full rounded-xl">
         <div className="flex justify-center mb-6 mt-4">
           <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
-            {skincare && skincare.image && (
+            {skincare && skincare.image ? (
               <Image
                 src={skincare.image}
-                alt={skincare.name}
+                alt={skincare.name || "No name available"}
                 layout="fill"
                 objectFit="cover"
               />
+            ) : (
+              <div className="flex justify-center items-center w-full h-full bg-gray-200">
+                <Spinner color="default" labelColor="foreground" size="lg" />
+              </div>
             )}
           </div>
         </div>

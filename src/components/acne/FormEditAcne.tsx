@@ -112,6 +112,7 @@ const FormEditAcne: FC<FormEditAcne> = (props) => {
                        />
                      </div>
                      <Button
+                       id="add-acne"
                        type="submit"
                        className="bg-Bittersweet font-bold text-white mt-6"
                        onPress={onClose}

@@ -17,13 +17,12 @@ import AlertSuccess from "@/components/alert/alertSuccess";
 
 const SkinTable: FC<IskinProps> = (props) => {
   const { skins } = props;
-   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-   const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
-   const [selectedSkinId, setSelectedSkinId] = useState<number | null>(null);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+  const [selectedSkinId, setSelectedSkinId] = useState<number | null>(null);
   const sortSkins = skins.sort((a, b) => a.id - b.id);
 
-  
-   const handleDelete = async () => {
+  const handleDelete = async () => {
     try {
       if (selectedSkinId !== null) {
         await deleteSkin(selectedSkinId);
@@ -31,15 +30,15 @@ const SkinTable: FC<IskinProps> = (props) => {
         setSuccessModalOpen(true);
       }
     } catch (error) {
-      console.error('Error deleting facial:', error);
+      console.error("Error deleting facial:", error);
       setDeleteModalOpen(false);
     }
   };
-  
-   const handleSuccessClose = () => {
-     setSuccessModalOpen(false);
-     window.location.reload();
-   };
+
+  const handleSuccessClose = () => {
+    setSuccessModalOpen(false);
+    window.location.reload();
+  };
 
   return (
     <div className="p-6 font-Lexend">
@@ -66,11 +65,12 @@ const SkinTable: FC<IskinProps> = (props) => {
                 <TableCell>
                   <div className="flex justify-end">
                     <button
+                      id={`edit-${item.id}`}
                       type="button"
                       className="text-Bittersweet text-contentTable border border-red-500 px-4 py-2 rounded-xl hover:bg-red-50"
                       onClick={() => {
                         setSelectedSkinId(item.id);
-                       setDeleteModalOpen(true);
+                        setDeleteModalOpen(true);
                       }}
                     >
                       Delete
@@ -84,20 +84,20 @@ const SkinTable: FC<IskinProps> = (props) => {
       </div>
 
       <AlertDelete
-       isOpen={isDeleteModalOpen}
-       onOpenChange={() => setDeleteModalOpen(false)}
-       onDelete={handleDelete}
-     >
-       <p>Are you sure?</p>
-     </AlertDelete>
+        isOpen={isDeleteModalOpen}
+        onOpenChange={() => setDeleteModalOpen(false)}
+        onDelete={handleDelete}
+      >
+        <p>Are you sure?</p>
+      </AlertDelete>
 
-     <AlertSuccess
-       isOpen={isSuccessModalOpen}
-       onOpenChange={() => {}} 
-       onClose={handleSuccessClose}
-     >
-       <p>Deleted successfully!</p>
-     </AlertSuccess>
+      <AlertSuccess
+        isOpen={isSuccessModalOpen}
+        onOpenChange={() => {}}
+        onClose={handleSuccessClose}
+      >
+        <p>Deleted successfully!</p>
+      </AlertSuccess>
     </div>
   );
 };

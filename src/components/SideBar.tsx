@@ -50,7 +50,7 @@ const SideBar: FC<SideBarProps> = (props) => {
           <ul className="list-none flex flex-col justify-center items-center gap-y-4">
             {dataSideBar.map((item, index) => (
               <li key={index}>
-                <Link href={item.link} className={category === item.link.split("/")[2] ? activeStyle : inactiveStyle}>
+                <Link href={item.link} id={item.title} className={category === item.link.split("/")[2] ? activeStyle : inactiveStyle}>
                   {item.title}
                 </Link>
               </li>
