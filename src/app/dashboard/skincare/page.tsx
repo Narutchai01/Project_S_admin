@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Iskincare } from "@/interface/skincare";
 import { fectchSkincares } from "@/serverAction/skincare";
-import SkincareTable from "@/components/skincare/skincareTable";
+import SkincareTable from "@/components/table/skincareTable";
 import { useContext } from "react";
 import { DashBoardContext } from "@/app/dashboard/layout";
 

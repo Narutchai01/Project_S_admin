@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Iskin } from "@/interface/skin";
 import { fetchSkin } from "@/serverAction/skin";
-import SkinTable from "@/components/skin/skinTable";
+import SkinTable from "@/components/table/skinTable";
 
 const Skinpage = () => {
   const [skins, setSkins] = useState<Iskin[]>([]);

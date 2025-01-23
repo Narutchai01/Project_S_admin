@@ -113,7 +113,7 @@ const FormEditSkin: FC<FormEditSkin> = (props) => {
                         />
                       </div>
                       <Button
-                        id="add-skin"
+                        id="update"
                         type="submit"
                         className="bg-Bittersweet font-bold text-white mt-6"
                         onPress={onClose}

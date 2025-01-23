@@ -24,22 +24,21 @@ interface FormEditSkincare {
 const FormEditSkincare: FC<FormEditSkincare> = (props) => {
   const [image, setImage] = useState<File | null>(null);
   const { isOpen, onOpenChange, skincare } = props;
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+  
+  const handleFormSubmit = async (formData: FormData) => {
+    try {
+      await updateSkincare(skincare.id, formData);
+      setSuccessModalOpen(true);
+    } catch (error) {
+      console.error("Error updating facial:", error);
+    }
+  };
 
-     const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
-  
-     const handleFormSubmit = async (formData: FormData) => {
-      try {
-        await updateSkincare(skincare.id, formData);
-        setSuccessModalOpen(true);
-      } catch (error) {
-        console.error("Error updating facial:", error);
-      }
-    };
-  
-    const handleSuccessClose = () => {
-      setSuccessModalOpen(false);
-      window.location.reload();
-    };
+  const handleSuccessClose = () => {
+    setSuccessModalOpen(false);
+    window.location.reload();
+  };
 
   return (
     <>
@@ -128,10 +127,7 @@ const FormEditSkincare: FC<FormEditSkincare> = (props) => {
                       id="update"
                       type="submit"
                       className="bg-Bittersweet font-bold text-white mt-4"
-                      onPress={() => {
-                        onClose();
-                        window.location.reload();
-                      }}
+                      onPress={onClose}
                     >
                       Update
                     </Button>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import FormAddSkin from "@/components/skin/formAddSkin";
+import FormAddSkin from "@/components/form/formAddSkin";
 
 function AddSkinpage() {
   return (
