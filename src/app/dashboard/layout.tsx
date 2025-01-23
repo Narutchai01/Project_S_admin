@@ -15,6 +15,8 @@ interface DashBoardContextType {
   isOpen: boolean;
   onOpen: () => void;
   onOpenChange: () => void;
+  setSearch: (search: string) => void;
+  search : string;
 }
 
 export const DashBoardContext = createContext<DashBoardContextType | undefined>(
@@ -27,6 +29,7 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   const [dataAdmin, setDataAdmin] = useState<Data | undefined>(undefined);
   const [itemName, setItemName] = useState<string>("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     fecthAdmin().then((res) => {
@@ -34,11 +37,11 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     });
   }, []);
 
-  
+
 
   return (
     <DashBoardContext.Provider
-      value={{ setItemName, isOpen, onOpen, onOpenChange }}
+      value={{ setItemName, isOpen, onOpen, onOpenChange, setSearch, search }}
     >
       <div className="jun-layout">
         <header className="jun-header jun-header-h-[3.5rem]">
@@ -49,7 +52,7 @@ const DashBoardlayout = ({ children }: Readonly<{ children: ReactNode }>) => {
               <HeaderAdd category={category} />
             )
           ) : (
-            <Header category={category} />
+            <Header category={category} setSearch={setSearch} />
           )}
         </header>
         <main className="jun-content bg-white-600">{children}</main>
