@@ -12,10 +12,14 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = (props) => {
   const { category ,setSearch } = props;
 
+  const upperCategory = (title:string) => {
+    return title.charAt(0).toUpperCase() + title.slice(1);
+  }
+
   return (
     <>
       <div className=" flex flex-row w-full justify-between items-center container mx-auto px-6">
-        <h1 className=" text-heading text-Quartz">{category}</h1>
+        <h1 className= {`text-heading text-Quartz  ${category !== "skincare" ? "w-[360px]" : "w-auto"}`}>{category !== "facial" ? upperCategory(category) : "Skin Problems"}</h1>
         <div className=" w-full container mx-auto px-6">
           {category === "skincare" && (
             <Input
