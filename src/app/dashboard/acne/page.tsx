@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import AcneTable from "@/components/acne/acneTable";
+import AcneTable from "@/components/table/acneTable";
 import { fectchAcnes } from "@/serverAction/acne";
 import {Iacne } from "@/interface/acne";
 

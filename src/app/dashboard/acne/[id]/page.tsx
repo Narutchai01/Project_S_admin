@@ -5,7 +5,7 @@ import { IAcneByIdpageProps, Iacne } from "@/interface/acne";
 import { fectchAcneById } from "@/serverAction/acne";
 import { Textarea } from "@nextui-org/react";
 import Image from "next/image";
-import FormEditAcne from "@/components/acne/FormEditAcne";
+import FormEditAcne from "@/components/formedit/FormEditAcne";
 import { Spinner } from "@heroui/react";
 
 const AcneByIdPage: FC<IAcneByIdpageProps> = ({ params }) => {

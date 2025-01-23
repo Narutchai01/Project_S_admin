@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ISkincareByIDpageProps, Iskincare } from "@/interface/skincare";
 import { DashBoardContext } from "../../layout";
 import { fectchSkincareById } from "@/serverAction/skincare";
-import FromEditSkincare from "@/components/skincare/formEditSkincare";
+import FromEditSkincare from "@/components/formedit/formEditSkincare";
 
 const SkincareByIdPage: FC<ISkincareByIDpageProps> = ({ params }) => {
   const context = useContext(DashBoardContext);

@@ -6,7 +6,7 @@ import { DashBoardContext } from "../../layout";
 import { fetchSkinById } from "@/serverAction/skin";
 import { Spinner, Textarea } from "@nextui-org/react";
 import Image from "next/image";
-import FormEditSkin from "@/components/skin/formEditSkin";
+import FormEditSkin from "@/components/formedit/formEditSkin";
 
 const SkinByIdpage: FC<IskinByIdpageProps> = ({ params }) => {
   const context = useContext(DashBoardContext);
