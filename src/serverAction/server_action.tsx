@@ -70,3 +70,18 @@ export const fecthAdmin = async () => {
   });
   return response;
 };
+
+export const handlerLogout = async () => {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token");
+    if (!token) {
+      return;
+    }
+    await cookieStore.delete("token");
+    redirect("/auth");
+  } catch (error) {
+    console.error("Error:", error);
+    return error;
+  }
+};
