@@ -1,48 +1,49 @@
 "use client";
-import React, { FC, useEffect, useState, useContext } from "react";
+
+import React, { FC, useState, useEffect, useContext } from "react";
+import { IskinByIdpageProps, Iskin } from "@/interface/skin";
+import { DashBoardContext } from "../../layout";
+import { fetchSkinById } from "@/serverAction/skin";
 import { Spinner, Textarea } from "@nextui-org/react";
 import Image from "next/image";
-import { ISkincareByIDpageProps, Iskincare } from "@/interface/skincare";
-import { DashBoardContext } from "../../layout";
-import { fectchSkincareById } from "@/serverAction/skincare";
-import FromEditSkincare from "@/components/formedit/formEditSkincare";
+import FormEditSkin from "@/components/formedit/formEditSkin";
 
-const SkincareByIdPage: FC<ISkincareByIDpageProps> = ({ params }) => {
+const SkinByIdpage: FC<IskinByIdpageProps> = ({ params }) => {
   const context = useContext(DashBoardContext);
   const { setItemName, isOpen, onOpenChange } = context!;
   const [id, setId] = useState<string>("");
-  const [skincare, setSkincare] = useState<Iskincare>();
+  const [skin, setSkin] = useState<Iskin>();
 
   useEffect(() => {
     params.then((params) => {
       const id = String(params.id);
       setId(id);
     });
-    fectchSkincareById(id)
+    fetchSkinById(id)
       .then((response) => {
         const data = response.data;
-        setSkincare(data);
+        setSkin(data);
       })
       .catch((error) => {
         console.log("Error:", error);
       });
 
-    if (skincare?.name) {
-      setItemName(skincare.name);
+    if (skin?.name) {
+      setItemName(skin.name);
     }
-  }, [skincare?.name, id, params, setItemName]);
+  }, [skin?.name, id, params, setItemName]);
 
-  console.log("skincare", skincare);
+  console.log("skin", skin);
 
   return (
     <div className="flex justify-center items-center">
       <div className="max-w-6xl w-full rounded-xl">
         <div className="flex justify-center mb-6 mt-4">
           <div className="w-[350px] h-[360px] relative rounded-2xl overflow-hidden shadow-md">
-            {skincare && skincare.image ? (
+            {skin && skin.image ? (
               <Image
-                src={skincare.image}
-                alt={skincare.name || "No name available"}
+                src={skin.image}
+                alt={skin.name || "No name available"}
                 layout="fill"
                 objectFit="cover"
               />
@@ -54,29 +55,19 @@ const SkincareByIdPage: FC<ISkincareByIDpageProps> = ({ params }) => {
           </div>
         </div>
         <div className="bg-white rounded-xl shadow-md border p-6">
-          <h2 className="text-titleCrad text-Quartz mb-2">Skincare</h2>
-          <Textarea
-            className="max-w-full h-10 text-contentCrad mb-4"
-            value={skincare?.name}
-            readOnly={true}
-          />
-          <h2 className="text-titleCrad text-Quartz mb-2">Description</h2>
+          <h2 className="text-titleCrad text-Quartz mb-2">Skin</h2>
           <Textarea
             className="max-w-full h-10 text-contentCrad mb-2"
-            value={skincare?.description}
+            value={skin?.name}
             readOnly={true}
           />
         </div>
       </div>
-      {skincare && (
-        <FromEditSkincare
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}
-          skincare={skincare}
-        />
+      {skin && (
+        <FormEditSkin isOpen={isOpen} onOpenChange={onOpenChange} skin={skin} />
       )}
     </div>
   );
 };
 
-export default SkincareByIdPage;
+export default SkinByIdpage;
