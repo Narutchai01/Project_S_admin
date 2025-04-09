@@ -11,16 +11,19 @@ export const fetchSkin = async () => {
 };
 
 export const deleteSkin = async (id: number) => {
-  try {
-    const response = await fetchInstance(`/admin/skin/${id}`, {
-      method: "DELETE",
-    });
-    console.log("Success:", response);
-    return response;
-  } catch (error) {
+  await CheckCookie();
+  const token = await getToken();
+
+  const response = await fetchInstance(`/admin/skin/${id}`, {
+    method: "DELETE",
+    headers: {
+      token: token,
+    },
+  }).catch((error) => {
     console.error("Error:", error);
-    return null;
-  }
+    return error;
+  });
+  return response;
 };
 
 export const addSkin = async (formData: FormData) => {
@@ -50,13 +53,21 @@ export const fetchSkinById = async (id: string) => {
 };
 
 export const updateSkin = async (id: number, formData: FormData) => {
+  await CheckCookie();
+  const token = await getToken();
+
   formData.append("image", formData.get("file") as Blob);
+
   const response = await fetchInstance(`/admin/skin/${id}`, {
     method: "PUT",
+    headers: {
+      token: token,
+    },
     body: formData,
   }).catch((error) => {
     console.error("Error:", error);
     return error;
   });
+
   return response;
 };
