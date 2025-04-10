@@ -41,22 +41,31 @@ export const fectchSkincares = async () => {
   };
   
     export const deleteSkincare = async (id: number) => {
-        try {
+        await CheckCookie();
+        const token = await getToken();
+    
         const response = await fetchInstance(`/admin/skincare/${id}`, {
             method: "DELETE",
+            headers: {
+                token: token,
+            },
+        }).catch((error) => {
+            console.error("Error:", error);
+            return error;
         });
-        console.log("Success:", response);
         return response;
-        } catch (error) {
-        console.error("Error:", error);
-        return null;
-        }
     };
 
     export const updateSkincare = async (id: number, formData: FormData) => {
+        await CheckCookie();
+        const token = await getToken();
+
         formData.append("image", formData.get("file") as Blob);
         const response = await fetchInstance(`/admin/skincare/${id}`, {
             method: "PUT",
+            headers: {
+                token: token,
+            },
             body: formData,
         }).catch((error) => {
             console.error("Error:", error);

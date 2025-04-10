@@ -14,8 +14,14 @@ export const fectchAcnes = async () => {
 }
 
 export const deleteAcne = async (id: number) => {
+  await CheckCookie();
+  const token = await getToken();
+
   const response = await fetchInstance(`/admin/acne/${id}`, {
     method: "DELETE",
+     headers: {
+      token: token,
+    },
   }).catch((error) => {
     console.error("Error:", error);
     return error;
@@ -51,9 +57,15 @@ export const fectchAcneById = async (id: string) => {
 }
 
 export const updateAcne = async ( id: number, formData: FormData) => {
+  await CheckCookie();
+  const token = await getToken();
+
   formData.append("image", formData.get("file") as Blob);
   const response = await fetchInstance(`/admin/acne/${id}`, {
     method: "PUT",
+    headers: {
+      token: token,
+    },
     body: formData,
   }).catch((error) => {
     console.error("Error:", error);
